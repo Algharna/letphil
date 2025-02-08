@@ -1,0 +1,10 @@
+flowchart:
+https://app.diagrams.net/
+
+card game:
+https://www.memorymatching.com/
+
+Individual Task: Create your own cards. 
+Back Cover
+Face of Card (image to match)
+12 Total cards
