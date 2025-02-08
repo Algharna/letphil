@@ -1,0 +1,41 @@
+body {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: skyblue;
+  margin-top: 10px;
+}
+.container {
+  border: 1px solid black;
+  background-color: lightskyblue;
+  border-radius: 5px;
+  width: 80%;
+  height: 500px;
+}
+input {
+  border-radius: 5px;
+  border: none;
+  margin: 5px;
+  padding: 5px;
+}
+button {
+  margin: 5px;
+  padding: 5px;
+  color: darkblue;
+  background-color: #f0ffff;
+  border: none;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #f0ffff6e;
+  transition: ease-in 0.15s;
+}
+li {
+  list-style-type: none;
+}
+p {
+  display: inline;
+}

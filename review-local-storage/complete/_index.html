@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List with LocalStorage</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .todo-container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .todo-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="todo-container">
+      <h2>Todo List</h2>
+      <input type="text" id="todo-input" placeholder="Enter a new todo" />
+      <button onclick="addTodo()">Add</button>
+      <ul id="todo-list"></ul>
+      <button onclick="clearTodos()">Clear All</button>
+    </div>
+    <script>
+      function addTodo() {
+        const todoInput = document.getElementById("todo-input");
+        const todoText = todoInput.value.trim();
+        if (todoText === "") return;
+
+        const todos = JSON.parse(localStorage.getItem("todos")) || [];
+        todos.push(todoText);
+        localStorage.setItem("todos", JSON.stringify(todos));
+
+        todoInput.value = "";
+        renderTodos();
+      }
+
+      function renderTodos() {
+        const todoList = document.getElementById("todo-list");
+        todoList.innerHTML = "";
+
+        const todos = JSON.parse(localStorage.getItem("todos")) || [];
+        todos.forEach((todo, index) => {
+          const li = document.createElement("li");
+          li.className = "todo-item";
+          li.innerHTML = `
+            <span>${todo}</span>
+            <button onclick="removeTodo(${index})">Remove</button>
+          `;
+          todoList.appendChild(li);
+        });
+      }
+
+      function removeTodo(index) {
+        const todos = JSON.parse(localStorage.getItem("todos")) || [];
+        todos.splice(index, 1);
+        localStorage.setItem("todos", JSON.stringify(todos));
+        renderTodos();
+      }
+
+      function clearTodos() {
+        localStorage.removeItem("todos");
+        renderTodos();
+      }
+
+      renderTodos();
+    </script>
+  </body>
+</html>

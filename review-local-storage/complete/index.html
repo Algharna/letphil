@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TODO LIST</title>
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .input-container {
+        justify-content: center;
+        display: flex;
+      }
+
+      .input-container input {
+        height: 34px;
+        width: 200px;
+        font-size: 18px;
+      }
+      .input-container button {
+        margin-left: 10px;
+        width: 100px;
+        border-radius: 7px;
+      }
+
+      .list-item {
+        border: 1px solid black;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="input-container">
+        <input type="text" id="todoInput" placeholder="add todo task" />
+        <button id="addTodoButton">+ todo</button>
+      </div>
+      <div>
+        <ul id="todoList"></ul>
+      </div>
+    </div>
+
+    <script>
+      console.log("LET'S GET STARTED");
+      function ListItemUI(task, taskIdx) {
+        return `
+            <div
+              class='list-item'
+            >
+              <p style="display: inline; text-decoration: ${
+                task.completed ? "line-through" : "none"
+              }">${task.value}</p>
+              <span>
+                <button onclick='markCompleted(${taskIdx})'>complete</button>
+                <button onclick='editTask(${taskIdx})'>edit</button>
+                <button onClick='removeTask(${taskIdx})'>remove</button>
+              </span>
+            </div>
+        `;
+      }
+
+      let todos = [];
+
+      window.onload = function () {
+        const storedTodos = localStorage.getItem("todos");
+        if (storedTodos) todos = JSON.parse(storedTodos);
+        renderTodos();
+      };
+
+      // compelted function for task toggling
+      function markCompleted(taskIdx) {
+        const completedTask = document.querySelector(
+          `.list-item:nth-child(${taskIdx + 1}) > p`
+        );
+
+        if (completedTask.style.textDecoration === "line-through") {
+          todos[taskIdx].completed = false;
+        } else {
+          todos[taskIdx].completed = true;
+        }
+        localStorage.setItem("todos", JSON.stringify(todos));
+        renderTodos();
+      }
+
+      function editTask(taskIdx) {
+        const task = document.querySelector(
+          `.list-item:nth-child(${taskIdx + 1})`
+        );
+        const editButton = document.querySelector(
+          `.list-item:nth-child(${taskIdx + 1}) button:nth-child(2)`
+        );
+
+        if (editButton.innerText === "edit") {
+          editButton.innerText = "save";
+          const p = document.querySelector(
+            `.list-item:nth-child(${taskIdx + 1}) > p`
+          );
+          p.remove();
+          const input = document.createElement("input");
+          input.value = todos[taskIdx].value;
+          // editButton.removeListener("click");
+          editButton.addEventListener("click", function () {
+            console.log("input.value =", input.value);
+            todos[taskIdx].value = input.value;
+            localStorage.setItem("todos", JSON.stringify(todos));
+            renderTodos();
+          });
+
+          task.prepend(input);
+        } else {
+          editButton.innerText = "edit";
+        }
+      }
+
+      function removeTask(taskIdx) {
+        console.log("remove task");
+        function filterCallback(el, idx) {
+          return idx !== taskIdx;
+        }
+        todos = todos.filter(filterCallback);
+        localStorage.setItem("todos", JSON.stringify(todos));
+        renderTodos();
+      }
+
+      addTodoButton.addEventListener("click", function () {
+        todos.push({
+          value: todoInput.value,
+          completed: false,
+        });
+        localStorage.setItem("todos", JSON.stringify(todos));
+        renderTodos();
+
+        todoInput.value = "";
+      });
+
+      function renderTodos() {
+        todoList.innerHTML = "";
+        for (let i = 0; i < todos.length; i++) {
+          todoList.innerHTML += ListItemUI(todos[i], i);
+        }
+      }
+    </script>
+  </body>
+</html>
+
+<!-- 
+[] create input to add todo - should als work on enter
+[] create button to handle addTodo
+
+[] craete list to hold todoItems
+[] todoItems should be able to be marked as compelted, removed, or edited
+
+[] todo list shoudl persist after refresh
+
+-->

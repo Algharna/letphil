@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Theme Changer</title>
+  </head>
+  <body></body>
+</html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Theme Selector</title>
+  </head>
+  <body>
+    <button onclick="setTheme('light')">Light Mode</button>
+    <button onclick="setTheme('dark')">Dark Mode</button>
+    <script>
+      function setTheme(theme) {
+        localStorage.setItem("theme", theme);
+        document.body.style.background = theme === "dark" ? "#333" : "#fff";
+        document.body.style.color = theme === "dark" ? "#fff" : "#000";
+      }
+
+      // Load theme on page load
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        setTheme(savedTheme);
+      }
+    </script>
+  </body>
+</html>

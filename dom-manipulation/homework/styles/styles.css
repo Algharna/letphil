@@ -1,0 +1,21 @@
+body {
+  background-color: beige;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+#counterContainer {
+  text-align: center;
+  padding: 100px;
+  margin: auto;
+  border: 2px solid burlywood;
+  border-radius: 20%;
+}
+p {
+  font-size: 2rem;
+}
+button {
+  font-size: 2rem;
+  padding: 20px;
+}

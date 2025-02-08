@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDo List</title>
+    <style></style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>ToDo List</h2>
+      <span>
+        <input
+          type="text"
+          id="listItemInput"
+          placeholder="Enter item here . . ."
+          label="listItemInput"
+          name="listItemInput"
+        />
+        <button type="submit" id="buttonListItem">Add to List</button>
+      </span>
+      <ul id="toDoList">
+        Your Things To Do:
+      </ul>
+    </div>
+    <script>
+      const listItemInput = document.querySelector("#listItemInput");
+      const buttonListItem = document.getElementById("buttonListItem");
+      const toDoList = document.getElementById("toDoList");
+      //selects the delete button by its ID
+      const buttonDeleteItem = document.getElementById("deleteItemButton");
+
+      buttonListItem.addEventListener("click", addToDo);
+
+      function createListItem() {
+        //creates List Item and Delete Button
+        const listItem = document.createElement("li");
+        const buttonDeleteItem = document.createElement("button");
+        buttonDeleteItem.innerText = "X";
+        buttonDeleteItem.id = "deleteItemButton";
+
+        //Checks if string is empty
+        if (listItemInput.value == "") {
+          alert("Please enter a value!");
+        }
+        //Creates li and delete button if string has a value
+        else {
+          listItem.innerText = listItemInput.value;
+          toDoList.appendChild(listItem);
+          listItem.appendChild(buttonDeleteItem);
+        }
+        buttonDeleteItem.addEventListener("click", () => {
+          buttonDeleteItem.remove();
+          listItem.remove();
+        });
+      }
+      //creates items into list
+      buttonListItem.addEventListener("click", createListItem);
+    </script>
+  </body>
+</html>

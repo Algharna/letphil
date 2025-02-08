@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        padding: 20px;
+      }
+
+      .header {
+        font-size: 20px;
+        color: aqua;
+      }
+
+      .container span {
+        display: flex;
+        flex-direction: row;
+        border: 1px solid black;
+        justify-content: center;
+      }
+
+      .container span button {
+        width: 100px;
+        font-size: 30px;
+      }
+
+      .container span p {
+        font-size: 30px;
+        width: 300px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="header">Counter</h1>
+      <span>
+        <button id="minusButton">-</button>
+        <p id="display">0</p>
+        <button id="plusButton">+</button>
+      </span>
+      <input id="countSelect" type="number" value="1" />
+    </div>
+
+    <script>
+      function counter(minusOrPlus) {
+        if (minusOrPlus === "+") {
+          display.innerText =
+            Number(display.innerText) + Number(countSelect.value);
+        } else {
+          display.innerText =
+            Number(display.innerText) - Number(countSelect.value);
+        }
+      }
+
+      minusButton.addEventListener("click", function () {
+        counter("-");
+      });
+
+      plusButton.addEventListener("click", function () {
+        counter("+");
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="./styles/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>ToDo List</h2>
+      <span>
+        <input
+          type="text"
+          id="taskInput"
+          placeholder="Enter task here . . ."
+          label="taskInput"
+          name="taskInput"
+        />
+        <button type="submit" id="addTask">Add Task</button>
+        <button id="clearTasks" onclick="clearTasks()">Clear Tasks</button>
+      </span>
+      <ul id="toDoList">
+        Your Things To Do:
+      </ul>
+    </div>
+    <script src="scripts/scripts.js"></script>
+  </body>
+</html>
