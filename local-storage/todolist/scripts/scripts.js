@@ -14,11 +14,16 @@ function ToDo(task, weight = 1) {
 }
 
 function addToDo() {
-  const toDo = new ToDo(taskInput.value);
-  toDos.push(toDo);
-  localStorage.setItem("toDos", JSON.stringify(toDos));
-  renderList();
+  if (taskInput.value.trim() == "") {
+    alert("Enter a valid task.");
+  } else {
+    const toDo = new ToDo(taskInput.value);
+    toDos.push(toDo);
+    localStorage.setItem("toDos", JSON.stringify(toDos));
+    renderList();
+  }
 }
+
 // render list function ---------------------------------------
 function renderListItem(toDoItem) {
   const li = document.createElement("li");
@@ -53,15 +58,19 @@ function renderListItem(toDoItem) {
     // Listens for the "Enter" key to confirm the edit
     newTask.addEventListener("keypress", function (e) {
       if (e.key === "Enter") {
-        const newValue = newTask.value;
-        const index = toDos.findIndex(
-          (item) => item.createdAt === toDoItem.createdAt
-        );
-        console.log("index =", index);
-        if (index !== -1) {
-          toDos[index].task = newValue;
-          toDos[index].updatedAt = new Date();
-          localStorage.setItem("toDos", JSON.stringify(toDos));
+        if (newTask.value.trim() == "") {
+          alert("Enter a valid task.");
+        } else {
+          const newValue = newTask.value;
+          const index = toDos.findIndex(
+            (item) => item.createdAt === toDoItem.createdAt
+          );
+          console.log("index =", index);
+          if (index !== -1) {
+            toDos[index].task = newValue;
+            toDos[index].updatedAt = new Date();
+            localStorage.setItem("toDos", JSON.stringify(toDos));
+          }
         }
         renderList();
       }
