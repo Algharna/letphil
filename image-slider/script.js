@@ -8,22 +8,22 @@ const imagesArray = [
 ];
 
 const images = [...imagesArray];
-window.onload = displayImages();
 console.log(images.length);
 
 function displayImages() {
-  const displayedImagesArea = document.getElementById("displayedImagesArea");
+  const imageHolder = document.getElementById("imageHolder");
   for (let i = 0; i < images.length; i++) {
     const imageArea = document.createElement("span");
     imageArea.id = "imageArea";
-    const image = document.createElement("image");
-    image.id = "image";
+    const image = document.createElement("img");
     image.src = images[i].src;
 
-    displayedImagesArea.appendChild(image);
+    imageHolder.appendChild(imageArea);
     imageArea.appendChild(image);
   }
 }
+
+displayImages();
 
 // previousImage() {
 

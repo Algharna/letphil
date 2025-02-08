@@ -7,20 +7,13 @@ body {
   justify-content: center;
   align-items: center;
 }
-.imageContainer {
+.imagesBorder {
   height: 500px;
-  width: 50vw;
+  width: auto;
   border: 1px solid black;
   border-radius: 5%;
   flex-direction: row;
-  align-content: flex-end;
-  margin: 5px;
-}
-
-.image {
-  margin: 10px;
-  border: 1px solid black;
-  border-radius: 5%;
+  align-content: center;
 }
 
 button {
@@ -29,8 +22,14 @@ button {
   padding: 5px;
   margin: 5px;
   cursor: pointer;
+  width: 2rem;
 }
 button:hover {
   background-color: darkturquoise;
   transition: ease-in 0.25s;
+}
+img {
+  width: auto;
+  height: 300px;
+  margin: 2px;
 }

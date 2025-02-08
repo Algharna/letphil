@@ -10,9 +10,11 @@
     <h1>Image Slider</h1>
     <div class="container">
       <div class="imageContainer">
-        <div id="displayedImagesArea"></div>
-        <button id="previousImage" onclick="previousImage()"><-</button>
-        <button id="nextImage" onclick="nextImage()">-></button>
+        <div class="imagesBorder">
+          <div id="imageHolder"></div>
+        </div>
+        <button id="previousImage" onclick="previousImage()"><=</button>
+        <button id="nextImage" onclick="nextImage()">=></button>
       </div>
     </div>
     <script src="script.js"></script>
