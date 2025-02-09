@@ -11,6 +11,7 @@ function ToDo(task, weight = 1) {
   this.weight = weight;
   this.createdAt = new Date();
   this.updatedAt = new Date();
+  this.completed = false;
 }
 
 function addToDo() {
@@ -21,6 +22,7 @@ function addToDo() {
     toDos.push(toDo);
     localStorage.setItem("toDos", JSON.stringify(toDos));
     renderList();
+    taskInput.value = "";
   }
 }
 
@@ -28,7 +30,8 @@ function addToDo() {
 function renderListItem(toDoItem) {
   const li = document.createElement("li");
   const span = document.createElement("span");
-  li.innerText = toDoItem.task;
+  const taskName = document.createElement("p");
+  taskName.innerText = toDoItem.task;
   const editTask = document.createElement("button");
   editTask.innerText = "Edit Task";
   editTask.id = "editTasks";
@@ -39,21 +42,43 @@ function renderListItem(toDoItem) {
   removeTask.innerText = "Remove";
   removeTask.id = "removeTask";
   li.appendChild(span);
+  span.appendChild(taskName);
   span.append(completeTask);
   span.appendChild(editTask);
   span.appendChild(removeTask);
 
   console.log(localStorage.getItem("toDos", "createdAt"));
 
+  function checkIfCompleted() {
+    taskName.style.textDecoration = toDoItem.completed
+      ? "line-through"
+      : "none";
+  }
+  checkIfCompleted();
+
+  //Checks if Task is completed or not
   completeTask.addEventListener("click", function () {
-    li.style.textDecoration = "line-through";
+    let newCompleted = !toDoItem.completed;
+
+    const index = toDos.findIndex(
+      (item) => item.createdAt === toDoItem.createdAt
+    );
+    if (index !== -1) {
+      toDos[index].completed = newCompleted;
+      localStorage.setItem("toDos", JSON.stringify(toDos));
+    }
+
+    console.log(toDoItem.task, toDoItem.completed);
+    renderList();
   });
+
   editTask.addEventListener("click", function () {
     const newTask = document.createElement("input");
     newTask.placeholder = "Enter new task . . .";
     newTask.id = "newTask";
 
-    li.parentNode.replaceChild(newTask, li);
+    taskName.parentNode.replaceChild(newTask, taskName);
+    span.prepend(newTask);
 
     // Listens for the "Enter" key to confirm the edit
     newTask.addEventListener("keypress", function (e) {
@@ -65,7 +90,6 @@ function renderListItem(toDoItem) {
           const index = toDos.findIndex(
             (item) => item.createdAt === toDoItem.createdAt
           );
-          console.log("index =", index);
           if (index !== -1) {
             toDos[index].task = newValue;
             toDos[index].updatedAt = new Date();
@@ -83,14 +107,12 @@ function renderListItem(toDoItem) {
     const index = toDos.findIndex(
       (item) => item.createdAt === toDoItem.createdAt
     );
-    console.log("index =", index);
     if (index !== -1) {
       toDos.splice(index, 1);
       localStorage.setItem("toDos", JSON.stringify(toDos));
       renderList();
     }
   });
-
   return li;
 }
 

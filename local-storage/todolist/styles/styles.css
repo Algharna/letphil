@@ -9,11 +9,10 @@ body {
   margin-top: 10px;
 }
 .container {
-  border: 1px solid black;
   background-color: lightskyblue;
   border-radius: 5px;
   width: 80%;
-  height: 500px;
+  height: 100vh;
 }
 input {
   border-radius: 5px;
@@ -33,9 +32,23 @@ button:hover {
   background-color: #f0ffff6e;
   transition: ease-in 0.15s;
 }
+ul {
+  margin: 0;
+  padding: 0;
+}
 li {
   list-style-type: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 5px;
+  width: auto;
+  padding: 10px;
+  flex-direction: column;
 }
 p {
   display: inline;
+}
+
+hr {
+  width: 80%;
 }
