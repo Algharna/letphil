@@ -6,29 +6,50 @@ const imagesArray = [
   { src: "./images/elf5.jpg" },
   { src: "./images/elf6.jpg" },
 ];
-
+let imagesCount = 0;
 const images = [...imagesArray];
-console.log(images.length);
-
+const imageHolder = document.getElementById("imageHolder");
+window.onload = function () {
+  const imageArea = document.createElement("span");
+  imageArea.id = "imageArea";
+  const image = document.createElement("img");
+  image.src = "./images/elf1.jpg";
+  imageHolder.appendChild(imageArea);
+  imageArea.appendChild(image);
+};
 function displayImages() {
-  const imageHolder = document.getElementById("imageHolder");
-  for (let i = 0; i < images.length; i++) {
-    const imageArea = document.createElement("span");
-    imageArea.id = "imageArea";
-    const image = document.createElement("img");
-    image.src = images[i].src;
-
-    imageHolder.appendChild(imageArea);
-    imageArea.appendChild(image);
-  }
+  imageHolder.innerHTML = "";
+  let index = imagesCount % images.length;
+  const imageArea = document.createElement("span");
+  imageArea.id = "imageArea";
+  const image = document.createElement("img");
+  image.src = images[index].src;
+  imageHolder.appendChild(imageArea);
+  imageArea.appendChild(image);
+  imagesCount++;
 }
 
-displayImages();
+function generateImage() {
+  imageHolder.innerHTML = "";
+  let index = imagesCount % images.length;
+  const imageArea = document.createElement("span");
+  imageArea.id = "imageArea";
+  const image = document.createElement("img");
+  image.src = images[index].src;
+  imageHolder.appendChild(imageArea);
+  imageArea.appendChild(image);
+}
 
-// previousImage() {
+function cycleImagesRight() {
+  imagesCount = (imagesCount + 1) % images.length;
+  generateImage();
+}
 
-// }
+function cycleImagesLeft() {
+  imagesCount = (imagesCount - 1 + images.length) % images.length;
+  generateImage();
+}
 
-// nextImage() {
-
-// }
+function cycleThroughImages() {
+  setInterval(displayImages, 1000);
+}
