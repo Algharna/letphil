@@ -72,13 +72,20 @@ function renderListItem(toDoItem) {
     renderList();
   });
 
+  //Edit Task ----------------
   editTask.addEventListener("click", function () {
     const newTask = document.createElement("input");
-    newTask.placeholder = "Enter new task . . .";
+    newTask.placeholder = "Edit task (Enter to confirm)";
     newTask.id = "newTask";
 
     taskName.parentNode.replaceChild(newTask, taskName);
     span.prepend(newTask);
+    editTask.disabled = true;
+    completeTask.disabled = true;
+    removeTask.disabled = true;
+    editTask.style.backgroundColor = "gray";
+    completeTask.style.backgroundColor = "gray";
+    removeTask.style.backgroundColor = "gray";
 
     // Listens for the "Enter" key to confirm the edit
     newTask.addEventListener("keypress", function (e) {
@@ -101,6 +108,7 @@ function renderListItem(toDoItem) {
     });
   });
 
+  //Remove Task--------------------------------------
   removeTask.addEventListener("click", function () {
     console.log(toDos);
 
@@ -115,7 +123,7 @@ function renderListItem(toDoItem) {
   });
   return li;
 }
-
+//Renders list------------------
 function renderList() {
   const getTodos = localStorage.getItem("toDos");
   if (getTodos) toDos = JSON.parse(getTodos);
@@ -126,7 +134,7 @@ function renderList() {
     toDoList.appendChild(listItem);
   }
 }
-
+//Clears localStorage and reloads page---------
 function clearTasks() {
   localStorage.clear();
   alert("Tasks Cleared!");

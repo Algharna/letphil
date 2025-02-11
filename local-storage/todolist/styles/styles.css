@@ -38,12 +38,16 @@ ul {
 }
 li {
   list-style-type: none;
-  border: 1px solid black;
   border-radius: 5px;
   margin: 5px;
   width: auto;
   padding: 10px;
   flex-direction: column;
+}
+span {
+  border: 1px solid black;
+  margin: 10px;
+  padding: 10px;
 }
 p {
   display: inline;
@@ -51,4 +55,7 @@ p {
 
 hr {
   width: 80%;
+}
+#newTask {
+  width: 10rem;
 }
