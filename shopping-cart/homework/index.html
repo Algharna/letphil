@@ -9,15 +9,16 @@
   <body>
     <h1>Shopping Cart</h1>
 
-    <div>
-      <input type="text" id="product-name" placeholder="Enter product name" />
-      <input type="number" id="product-price" placeholder="Enter price" />
-      <button onclick="addProduct()">Add to Cart</button>
-    </div>
-
-    <ul id="cart-list"></ul>
-
-    <h2>Total: $<span id="total-price">0</span></h2>
+    <div class="container">
+      <input type="text" id="productName" placeholder="Enter product name" />
+      <input type="number" id="productPrice" placeholder="Enter price" />
+      <input type="text" id="productImage" placeholder="Enter Image URL" />
+      <button id="addButton">+</button>
+      <div id="productContainer">    
+      </div>
+    
+  
     <script src="scripts/script.js"></script>
   </body>
 </html>
+<img src="" alt="">

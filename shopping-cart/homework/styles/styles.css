@@ -4,4 +4,48 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin: 0;
+  padding: 0;
+  background-color: #ec6d6d;
+  height: 100vh;
+}
+.container {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 3px;
+  margin-top: 20px;
+  box-shadow: 5px 5px 5px black;
+  width: 600px;
+}
+button {
+  width: 2rem;
+  border: 0.5px solid black;
+  border-radius: 3px;
+  margin: 10px;
+}
+button:hover {
+  background-color: #ec6d6d;
+  transition: ease-in 0.5s;
+}
+table {
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 3px;
+  border-radius: 3px;
+  justify-content: row;
+  table-layout: fixed;
+}
+th {
+  column-span: 4;
+}
+th,
+td {
+  border: 1px solid black;
+}
+img {
+  height: 50px;
+}
+p {
+  display: inline-block;
 }

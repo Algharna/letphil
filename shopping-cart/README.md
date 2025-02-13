@@ -1,7 +1,3 @@
-Sure! Let's use a **simple shopping cart** as the example instead of a to-do list.
-
----
-
 ## **Lesson Title:** Manipulating an Array and Rerendering it in HTML (Shopping Cart Example)
 
 **Objective:**
@@ -57,7 +53,7 @@ Sure! Let's use a **simple shopping cart** as the example instead of a to-do lis
 ### **2. Initializing the Cart and Rendering it** (10 minutes)
 
 ```js
-let cart = [];
+let cart = []; // array starts out empty
 
 function renderCart() {
   const list = document.getElementById("cart-list");
@@ -66,7 +62,14 @@ function renderCart() {
 
   let total = 0;
 
-  cart.forEach((item, index) => {
+  [
+   0 { name: "shirt", price: 100 },
+   1 { name: "shorts", price: 130 },
+  ];
+
+
+
+  function cartForEachHandler(item, index, originalArr) {
     const li = document.createElement("li");
     li.textContent = `${item.name} - $${item.price}`;
 
@@ -78,12 +81,16 @@ function renderCart() {
     list.appendChild(li);
 
     total += item.price;
+  }
+
+  cart.forEach((item, index) => {
+
   });
 
   totalPriceEl.textContent = total;
 }
 
-renderCart();
+window.onload = renderCart();
 ```
 
 ### **Explanation:**
@@ -171,5 +178,5 @@ li.appendChild(editBtn);
 1. Add quantity support (e.g., `{ name: "Apple", price: 2, quantity: 3 }`).
 2. Prevent duplicate products from being added.
 3. Add a "Clear Cart" button to reset everything.
-
-This example applies **real-world shopping cart logic**, making it more engaging.
+4. add total cost ui at bottom of list
+   This example applies **real-world shopping cart logic**, making it more engaging.

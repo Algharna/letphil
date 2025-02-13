@@ -14,7 +14,7 @@ console.log(cities); // Expected output: ["New York", "Los Angeles", "Chicago", 
 let numbers = [];
 
 // Use a loop to push numbers 1 to 5 into the `numbers` array
-for (let i = 0; i < 6; i++) {
+for (let i = 1; i < 5; i++) {
   numbers.push(i);
 }
 console.log(numbers); // Expected output: [1, 2, 3, 4, 5]
