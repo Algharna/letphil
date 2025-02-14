@@ -47,8 +47,6 @@ function renderListItem(toDoItem) {
   span.appendChild(editTask);
   span.appendChild(removeTask);
 
-  console.log(localStorage.getItem("toDos", "createdAt"));
-
   function checkIfCompleted() {
     taskName.style.textDecoration = toDoItem.completed
       ? "line-through"

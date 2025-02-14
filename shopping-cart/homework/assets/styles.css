@@ -7,7 +7,6 @@ body {
   margin: 0;
   padding: 0;
   background-color: #ec6d6d;
-  height: 100vh;
 }
 .container {
   flex: 1;
@@ -16,7 +15,8 @@ body {
   border-radius: 3px;
   margin-top: 20px;
   box-shadow: 5px 5px 5px black;
-  width: 600px;
+  width: 650px;
+  height: 500px;
 }
 button {
   width: 2rem;
@@ -25,7 +25,7 @@ button {
   margin: 10px;
 }
 button:hover {
-  background-color: #ec6d6d;
+  background-color: #f30e0e;
   transition: ease-in 0.5s;
 }
 table {
@@ -48,4 +48,15 @@ img {
 }
 p {
   display: inline-block;
+}
+#trash {
+  height: 1rem;
+  width: 2rem;
+  padding: 3px;
+  cursor: pointer;
+  border: 1px solid black;
+}
+#trash:hover {
+  background-color: #f30e0e;
+  transition: ease-in 0.5s;
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shopping Cart</title>
-    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="assets/styles.css" />
   </head>
   <body>
     <h1>Shopping Cart</h1>
@@ -14,10 +14,12 @@
       <input type="number" id="productPrice" placeholder="Enter price" />
       <input type="text" id="productImage" placeholder="Enter Image URL" />
       <button id="addButton">+</button>
+      <img src="./assets/trash.svg" id="trash" onclick="clearCart()"/>
+      
       <div id="productContainer">    
       </div>
-    
-  
+      <h2>Total Price: $<p id="pTotalPrice">0</p>
+      </div>
     <script src="scripts/script.js"></script>
   </body>
 </html>
