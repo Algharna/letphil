@@ -30,10 +30,6 @@ button:hover {
 }
 table {
   width: 100%;
-  border: 1px solid black;
-  border-radius: 3px;
-  border-radius: 3px;
-  justify-content: row;
   table-layout: fixed;
 }
 th {
@@ -42,6 +38,7 @@ th {
 th,
 td {
   border: 1px solid black;
+  border-radius: 3px;
 }
 img {
   height: 50px;

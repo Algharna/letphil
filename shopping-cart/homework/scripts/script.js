@@ -1,10 +1,10 @@
+let totalPrice = 0;
 shoppingCartItems = [];
-window.onload = renderCartUI();
 
 //Render Shopping Cart-------------------------------
 function renderCartUI() {
-  // const getCart = localStorage.getItem("shopping-cart");
-  // if (getCart) shoppingCartItems = JSON.parse(getCart);
+  const getCart = localStorage.getItem("shopping-cart");
+  if (getCart) shoppingCartItems = JSON.parse(getCart);
 
   productContainer.innerHTML = "";
   productContainer.innerHTML = `
@@ -23,16 +23,12 @@ function renderCartUI() {
       current.name,
       current.price,
       current.quantity,
-      current.image,
-      current.totalPrice
+      current.image
     );
-    // current.totalPrice = current.totalPrice[i]++;
-    console.log(current.totalPrice);
+    totalPrice = current.price * current.quantity;
     const pTotalPrice = document.getElementById("pTotalPrice");
-    // current.totalPrice += current.quantity * current.price;
-    pTotalPrice.innerText = current.totalPrice;
+    pTotalPrice.innerText = totalPrice;
     productContainer.innerHTML += listItem;
-    // productContainer.innerHTML += totalPrice;
   }
 }
 
@@ -66,14 +62,12 @@ addButton.addEventListener("click", () => {
     const price = productPrice.value;
     let quantity = 1;
     const image = productImage.value;
-    const totalPrice = price * quantity;
 
     shoppingCartItems.push({
       name,
       price,
       quantity,
       image,
-      totalPrice,
     });
     localStorage.setItem("shopping-cart", JSON.stringify(shoppingCartItems));
     productName.value = "";
@@ -83,28 +77,25 @@ addButton.addEventListener("click", () => {
   }
 });
 
-function decreaseQuantity(idx, price, quantity, totalPrice) {
+function decreaseQuantity(idx, quantity) {
   quantity = shoppingCartItems[idx].quantity;
-  price = shoppingCartItems[idx].price;
   quantity--;
   if (quantity === 0) {
     shoppingCartItems.splice(idx, 1);
+    localStorage.setItem("shopping-cart", JSON.stringify(shoppingCartItems));
     renderCartUI();
   } else {
-    totalPrice = price * quantity;
     shoppingCartItems[idx].quantity = quantity;
-    shoppingCartItems[idx].totalPrice = totalPrice;
+    localStorage.setItem("shopping-cart", JSON.stringify(shoppingCartItems));
     renderCartUI();
   }
 }
 
-function increaseQuantity(idx, price, quantity, totalPrice) {
+function increaseQuantity(idx, quantity) {
   quantity = shoppingCartItems[idx].quantity;
-  price = shoppingCartItems[idx].price;
   quantity++;
-  totalPrice = price * quantity;
   shoppingCartItems[idx].quantity = quantity;
-  shoppingCartItems[idx].totalPrice = totalPrice;
+  localStorage.setItem("shopping-cart", JSON.stringify(shoppingCartItems));
   renderCartUI();
 }
 //Clears localStorage and reloads page---------
@@ -113,3 +104,5 @@ function clearCart() {
   alert("Cart Cleared!");
   window.location.reload();
 }
+
+window.onload = renderCartUI();
