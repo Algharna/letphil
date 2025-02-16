@@ -56,10 +56,9 @@ function calcTotalPrice(price, quantity) {
   return price * quantity;
 }
 //Add item to cart-----------------
-addButton.addEventListener("click", (name) => {
-  let existingItem = shoppingCartItems.find(
-    (item) => item.name === productName.value
-  );
+addButton.addEventListener("click", () => {
+  const name = productName.value.trim();
+  let existingItem = shoppingCartItems.find((item) => item.name === name);
 
   if (
     productName.value.trim() == "" ||
@@ -68,11 +67,14 @@ addButton.addEventListener("click", (name) => {
     existingItem
   ) {
     alert("Enter a valid product.");
+    productName.value = "";
+    productPrice.value = "";
+    productImage.value = "";
   } else {
-    const name = productName.value;
-    const price = productPrice.value;
+    const name = productName.value.trim();
+    const price = productPrice.value.trim();
     let quantity = 1;
-    const image = productImage.value;
+    const image = productImage.value.trim();
     shoppingCartItems.push({
       name,
       price,
