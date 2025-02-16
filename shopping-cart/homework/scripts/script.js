@@ -25,13 +25,16 @@ function renderCartUI() {
       current.quantity,
       current.image
     );
-    totalPrice = current.price * current.quantity;
+    totalPrice = shoppingCartItems.reduce(
+      (sum, current) => sum + calcTotalPrice(current.price, current.quantity),
+      0
+    );
     const pTotalPrice = document.getElementById("pTotalPrice");
     pTotalPrice.innerText = totalPrice;
     productContainer.innerHTML += listItem;
   }
 }
-
+//ListItem template for loop
 const ListItem = (idx, name, price, quantity, image) => {
   return `<table id="shoppingCart">
             <tr>  
@@ -48,13 +51,21 @@ const ListItem = (idx, name, price, quantity, image) => {
               </tr>
         </table>`;
 };
-
+//Calculate totalPrice
+function calcTotalPrice(price, quantity) {
+  return price * quantity;
+}
 //Add item to cart-----------------
-addButton.addEventListener("click", () => {
+addButton.addEventListener("click", (name) => {
+  let existingItem = shoppingCartItems.find(
+    (item) => item.name === productName.value
+  );
+
   if (
     productName.value.trim() == "" ||
     productPrice.value.trim() == "" ||
-    productImage.value.trim() == ""
+    productImage.value.trim() == "" ||
+    existingItem
   ) {
     alert("Enter a valid product.");
   } else {
@@ -62,7 +73,6 @@ addButton.addEventListener("click", () => {
     const price = productPrice.value;
     let quantity = 1;
     const image = productImage.value;
-
     shoppingCartItems.push({
       name,
       price,
@@ -76,7 +86,7 @@ addButton.addEventListener("click", () => {
     renderCartUI();
   }
 });
-
+//Increase or decrease quantities--------------
 function decreaseQuantity(idx, quantity) {
   quantity = shoppingCartItems[idx].quantity;
   quantity--;
