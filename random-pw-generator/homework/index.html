@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Password Generator</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Random Password Generator</h2>
+      <span
+        ><input
+          type="number"
+          name="numberInput"
+          id="numberInput"
+          placeholder="Enter Password Length"
+        />
+        <button id="generatePW">Generate Password</button>
+      </span>
+      <section>
+        <p>
+          Checked boxes will appear in the password. Uncheck to exclude them.
+        </p>
+        <br />
+        <label for="upper">Uppercase:</label>
+        <input type="checkbox" name="upper" id="upper" checked />
+        <label for="lower">Lowercase:</label>
+        <input type="checkbox" name="lower" id="lower" checked />
+        <label for="special">Special:</label>
+        <input type="checkbox" name="special" id="special" checked />
+        <label for="numbers">Numbers:</label>
+        <input type="checkbox" name="numbers" id="numbers" checked />
+      </section>
+      <br />
+      <p id="displayPassword"></p>
+    </div>
+    <script src="scripts/scripts.js"></script>
+  </body>
+</html>

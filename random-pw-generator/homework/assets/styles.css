@@ -1,0 +1,46 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  background-color: skyblue;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  height: 100vh;
+  width: auto;
+}
+.container input[type="number"],
+button {
+  text-align: center;
+  height: 30px;
+  border-radius: 3px;
+  border: none;
+}
+button {
+  padding: 5px;
+}
+button:hover {
+  background-color: lightcyan;
+  cursor: pointer;
+}
+h2 {
+  margin-bottom: 20px;
+}
+span {
+  margin: 5px;
+}
+section input[type="checkbox"] {
+  display: inline-flexbox;
+}
+
+input[type="checkbox"] {
+  width: 30px;
+  height: 15px;
+  margin-right: 10px;
+}
