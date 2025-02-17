@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column-reverse;
+      }
+      .container button,
+      input {
+        height: 50px;
+        width: 200px;
+        font-size: 18px;
+        padding: 2px;
+        text-align: center;
+      }
+
+      #generateButton {
+        margin-left: 7px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <span>
+        <input
+          id="numberInput"
+          type="number"
+          value="16"
+          placeholder="Length of password"
+        />
+        <button id="generateButton">generate</button>
+      </span>
+      <h2 id="showPassword"></h2>
+    </div>
+    <script src="random-pw-gen.js"></script>
+    <script>
+      generateButton.addEventListener("click", function () {
+        const v = parseInt(numberInput.value);
+        if (!v) alert("can not make empty password");
+        if (v > 50) alert("password too long");
+        const randomPassword = getRandomPassword(v);
+        console.log("randomPassword =", randomPassword);
+        showPassword.textContent = randomPassword;
+      });
+
+      showPassword.addEventListener("click", function () {
+        navigator.clipboard.writeText(showPassword.textContent);
+
+        // Alert the copied text
+        alert("Copied the text: " + showPassword.textContent);
+      });
+    </script>
+  </body>
+</html>
