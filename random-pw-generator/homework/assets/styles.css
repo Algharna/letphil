@@ -44,3 +44,6 @@ input[type="checkbox"] {
   height: 15px;
   margin-right: 10px;
 }
+#displayPassword:hover {
+  cursor: pointer;
+}

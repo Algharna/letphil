@@ -4,6 +4,7 @@ const characters = {
   special: "!@#$%^&*()_+[]{}|;:',.<>?",
   numbers: "0123456789",
 };
+const displayPassword = document.getElementById("displayPassword");
 
 function passwordGenerator(length) {
   const allChars =
@@ -38,7 +39,6 @@ function passwordGenerator(length) {
 generatePW.addEventListener("click", function () {
   const length = parseInt(numberInput.value);
   const password = passwordGenerator(length);
-  const displayPassword = document.getElementById("displayPassword");
   if (
     numberInput.value === "" ||
     numberInput.value > 51 ||
@@ -46,7 +46,12 @@ generatePW.addEventListener("click", function () {
   )
     alert("Please enter a number between 8 - 50."), (numberInput.value = "");
   else {
-    displayPassword.textContent = "Your password: " + password;
+    displayPassword.textContent = password;
     numberInput.value = "";
   }
+});
+
+displayPassword.addEventListener("click", function () {
+  navigator.clipboard.writeText(displayPassword.textContent);
+  alert("Copied password: " + displayPassword.textContent);
 });

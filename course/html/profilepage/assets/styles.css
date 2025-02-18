@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+nav {
+  text-align: center;
+}
+header {
+  align-items: flex-start;
+}
+body {
+  background-color: skyblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+footer {
+  align-items: flex-end;
+}
