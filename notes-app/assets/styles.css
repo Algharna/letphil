@@ -7,7 +7,7 @@ body {
   text-align: center;
 }
 
-#notes-area {
+#notes-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,24 +15,28 @@ body {
   height: 500px;
 }
 h2 {
-  color: #120e36;
+  color: #241d61;
 }
 hr {
   margin-top: 2px;
   color: #4136aa;
 }
 button {
-  height: 30px;
-  padding: 5px;
+  height: 40px;
+  padding: 10px;
   border: none;
   border-radius: 5px;
+  background-color: #b1aaf1;
+  color: white;
 }
 button:hover {
   background-color: #7366ec4d;
   transition: ease-in 0.25s;
-  border: 1px solid black;
+  cursor: pointer;
+  color: black;
+  border: 2px solid #181158;
 }
-#notesInput {
+#noteInput {
   text-align: center;
   border: none;
   border-radius: 5px;
@@ -43,7 +47,10 @@ button:hover {
 }
 #notesBorder {
   background-color: #7466ec;
-  border: 2px solid rgb(24, 17, 88);
+  border: 2px solid #181158;
   border-radius: 10px;
   padding: 50px;
+}
+#noteDisplay {
+  flex: 1;
 }

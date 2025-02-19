@@ -7,20 +7,21 @@
     <link rel="stylesheet" href="./assets/styles.css" />
   </head>
   <body>
-    <section id="notes-area">
-      <span id="notesBorder">
+    <section id="notes-container">
+      <section id="notesBorder">
         <h2>Notes App</h2>
         <hr />
         <br />
         <textarea
-          id="notesInput"
+          id="noteInput"
           name="noteInput"
           rows="4"
           cols="30"
-          placeholder="Your text here..."
+          placeholder="Enter note here"
         ></textarea>
-        <button id="addNote">Add Note</button>
-      </span>
+        <button id="btnAddNote">Add Note</button>
+        <div id="notesContainer"></div>
+      </section>
       <script src="./scripts/scripts.js"></script>
   </body>
 </html>
