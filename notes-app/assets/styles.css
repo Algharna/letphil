@@ -1,0 +1,49 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  background-color: #4136aa;
+  text-align: center;
+}
+
+#notes-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 500px;
+}
+h2 {
+  color: #120e36;
+}
+hr {
+  margin-top: 2px;
+  color: #4136aa;
+}
+button {
+  height: 30px;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+}
+button:hover {
+  background-color: #7366ec4d;
+  transition: ease-in 0.25s;
+  border: 1px solid black;
+}
+#notesInput {
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  display: block;
+  margin-bottom: 5px;
+  background-color: #b1aaf1;
+  color: black;
+}
+#notesBorder {
+  background-color: #7466ec;
+  border: 2px solid rgb(24, 17, 88);
+  border-radius: 10px;
+  padding: 50px;
+}
