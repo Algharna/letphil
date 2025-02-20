@@ -11,8 +11,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  height: 500px;
+  flex-flow: column wrap;
+  width: 100%;
+  overflow: hidden;
 }
 h2 {
   color: #241d61;
@@ -21,27 +22,51 @@ hr {
   margin-top: 2px;
   color: #4136aa;
 }
-button {
+
+#btnAddNote {
   height: 40px;
   padding: 10px;
   border: none;
   border-radius: 5px;
   background-color: #b1aaf1;
   color: white;
+  margin: 2px;
 }
-button:hover {
+#btnAddNote:hover {
   background-color: #7366ec4d;
   transition: ease-in 0.25s;
   cursor: pointer;
   color: black;
   border: 2px solid #181158;
 }
-#noteInput {
-  text-align: center;
+#btnDeleteNote,
+#btnEditNote,
+#btnSubmitEdit {
+  height: 30px;
+  padding: 10px;
   border: none;
   border-radius: 5px;
-  display: block;
+  background-color: #b1aaf1;
+  color: white;
+  margin: 2px;
+}
+#btnDeleteNote:hover,
+#btnEditNote:hover,
+#btnSubmitEdit:hover {
+  background-color: #b1aaf1;
+  transition: ease-in 0.25s;
+  cursor: pointer;
+  color: black;
+  border: 2px solid #181158;
+}
+
+#noteInput,
+#newNote {
+  border: none;
+  border-radius: 5px;
   margin-bottom: 5px;
+  height: 50px;
+  text-align: center;
   background-color: #b1aaf1;
   color: black;
 }
@@ -51,6 +76,18 @@ button:hover {
   border-radius: 10px;
   padding: 50px;
 }
-#noteDisplay {
-  flex: 1;
+.noteDisplay {
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #4136aa;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  color: #d9d7f1;
+  width: 100%;
+  max-width: 500px;
+  overflow-y: hidden;
+}
+#noteText {
+  display: inline-block;
 }

@@ -1,13 +1,13 @@
-//array for notes
-const notes = [];
-window.onload = localStorage.getItem("notes");
+notes = [];
 
 const noteInput = document.getElementById("noteInput");
 console.log(localStorage.getItem("notes"));
-//Renders notes in localstorage
+
+//Renders Notes UI
 function renderNotes() {
   const getNotes = localStorage.getItem("notes");
-  if (getNotes) localStorage.getItem(JSON.parse(getNotes));
+  if (getNotes) notes = JSON.parse(getNotes);
+
   const notesContainer = document.getElementById("notesContainer");
   notesContainer.innerHTML = "";
 
@@ -17,13 +17,11 @@ function renderNotes() {
     notesContainer.innerHTML += notesTemplate;
   }
 }
-
+//Notes template
 const NotesTemplate = (index, note) => {
-  return `<div id="noteDisplay">
-              <h4>Note</h4>
-              <br />
-              <p>${note}</p>
-              <button id="btnDeleteNote" onclick="deleteNote(${index})">X</button>
+  return `<div class="noteDisplay">
+              <p id="noteText">${note}</p>
+              <button id="btnEditNote" onClick="editNote(${index})">Edit</button><button id="btnDeleteNote" onClick="deleteNote(${index})">x</button>        
           </div>`;
 };
 
@@ -41,6 +39,52 @@ function addNote() {
   renderNotes();
 }
 
-// function deleteNote(index) {}
+//Edit function
+function editNote(index) {
+  //Get id of current note text
+  const noteIndex = document.querySelector(
+    `.noteDisplay:nth-child(${index + 1})`
+  );
+  const btnEditNote = document.querySelector(
+    `.noteDisplay:nth-child(${index + 1}) button:nth-child(2)`
+  );
+
+  const btnDeleteNote = document.querySelector(
+    `.noteDisplay:nth-child(${index + 1}) button:nth-child(3)`
+  );
+  btnDeleteNote.disabled = true;
+  btnDeleteNote.style.color = "red";
+
+  if (btnEditNote.innerText === "Edit") {
+    btnEditNote.innerText = "Save";
+    const note = document.querySelector(
+      `.noteDisplay:nth-child(${index + 1}) > p`
+    );
+    note.remove();
+    const newNoteInput = document.createElement("input");
+    newNoteInput.placeholder = "Enter new note";
+    newNoteInput.id = "newNote";
+
+    //Edits new value into local storage
+    btnEditNote.addEventListener("click", function () {
+      if (btnEditNote.innerText !== "Save" || newNote.value.trim() === "")
+        alert("Enter a valid note.");
+      else {
+        const newNoteValue = newNote.value;
+        notes[index].note = newNoteValue;
+        localStorage.setItem("notes", JSON.stringify(notes));
+        renderNotes();
+      }
+    });
+    noteIndex.prepend(newNoteInput);
+  }
+}
+
+function deleteNote(index) {
+  notes.splice(notes[index], 1);
+  localStorage.setItem("notes", JSON.stringify(notes));
+  renderNotes();
+}
 
 btnAddNote.addEventListener("click", addNote);
+window.onload = renderNotes();
