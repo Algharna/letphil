@@ -81,7 +81,10 @@ function editNote(index) {
 }
 
 function deleteNote(index) {
-  notes.splice(notes[index], 1);
+  function filterCallback(el, idx) {
+    return idx !== index;
+  }
+  notes = notes.filter(filterCallback);
   localStorage.setItem("notes", JSON.stringify(notes));
   renderNotes();
 }
