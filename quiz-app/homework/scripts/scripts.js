@@ -108,7 +108,7 @@ function createDropdownAnswerOption(answerKey, answerText) {
   option.textContent = answerText;
   return option;
 }
-//  ------------------------------------------------------
+
 // add answer option handler --------------------------------
 
 let addAnswerButton = document.querySelector(".answer-options li > button");
@@ -146,33 +146,46 @@ const storedQuestions =
 
 console.log("storedQuestions ", storedQuestions);
 
-for (let i = 0; i < storedQuestions.length; i++) {
-  const current = storedQuestions[i];
+function renderDisplay() {
+  for (let i = 0; i < storedQuestions.length; i++) {
+    const current = storedQuestions[i];
 
-  const question = current.question;
-  // const answerOptionsKey = current.answeroptions.key;
+    const question = current.question;
+    // const answerOptionsKey = current.answeroptions.key;
 
-  const answer = current.answer;
-  // when create element -> it's ready to get enriched
-  const div = document.createElement("div"); // <div></div>
-  const h3 = document.createElement("h3"); // <h3></h3>
-  h3.textContent = question;
-  // <h3>question content</h3>
-  div.appendChild(h3); // <div><h3>questionContent</h3></div>
+    const answer = current.answer;
+    // when create element -> it's ready to get enriched
+    const div = document.createElement("div"); // <div></div>
+    const h3 = document.createElement("h3"); // <h3></h3>
+    h3.textContent = question;
+    // <h3>question content</h3>
+    div.appendChild(h3); // <div><h3>questionContent</h3></div>
 
-  const answerOptions = current.answerOptions;
-  console.log(answerOptions);
-  for (a = 0; a < answerOptions.length; a++) {
-    const answerOptionQuestions = current.answerOptions[a].option;
-    const answerOptionsP = document.createElement("p");
-    answerOptionsP.textContent = answerOptionQuestions;
-    div.appendChild(answerOptionsP);
+    //loop for cycling through the answerOptions to get the values and answers
+    const answerOptions = current.answerOptions;
+    console.log(answerOptions);
+    for (a = 0; a < answerOptions.length; a++) {
+      const answerOptionValues = current.answerOptions[a].key;
+      const answerOptionOptions = current.answerOptions[a].option;
+      const answerOptionsP = document.createElement("p");
+      answerOptionsP.textContent =
+        answerOptionValues + ": " + answerOptionOptions;
+      div.appendChild(answerOptionsP);
+
+      function returnAnswerOptions() {
+        return answerOptionValues, answerOptionOptions;
+      }
+    }
+
+    const correctAnswer = document.createElement("p");
+    correctAnswer.textContent = answer;
+    div.appendChild(correctAnswer);
+    // p.textContent = JSON.stringify(storedQuestions[i]);
+    document.querySelector(".container").appendChild(div);
+    // <div class=container><div><h3>questionContent</h3></div></div>
   }
 
-  const correctAnswer = document.createElement("p");
-  correctAnswer.textContent = answer;
-  div.appendChild(correctAnswer);
-  // p.textContent = JSON.stringify(storedQuestions[i]);
-  document.querySelector(".container").appendChild(div);
-  // <div class=container><div><h3>questionContent</h3></div></div>
+  return returnAnswerOptions();
 }
+renderDisplay();
+console.log("returnAnswerOptions()", returnAnswerOptions());
