@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz App: Admin</title>
+    <link rel="stylesheet" href="../styles/styles.css" />
+  </head>
+  <body>
+    <!-- div holding whole app -->
+    <div class="container">
+      <!-- title -> h1 -->
+      <h1 class="title">Quiz Admin</h1>
+      <!-- container for form -->
+      <div>
+        <div>
+          <input id="questionInput" placeholder="question to ask" />
+          <!-- <button type="submit">+</button> -->
+        </div>
+        <ol class="answer-options" type="a">
+          <li>
+            <input />
+            <button>+</button>
+          </li>
+        </ol>
+        <div>
+          <select id="correctAnswerDropdown">
+            <option value="">select correct answer</option>
+          </select>
+        </div>
+        <button type="submit">submit question</button>
+      </div>
+      <!-- display created questions -->
+      <pre id="displayQuestions"></pre>
+    </div>
+    <script src="./scripts/scripts.js"></script>
+  </body>
+</html>
