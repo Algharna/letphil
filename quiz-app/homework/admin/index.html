@@ -10,11 +10,16 @@
     <!-- div holding whole app -->
     <div class="container">
       <!-- title -> h1 -->
-      <h1 class="title">Quiz Admin</h1>
+      <h1 class="title">Quiz Admin Panel</h1>
       <!-- container for form -->
       <div>
         <div>
-          <input id="questionInput" placeholder="question to ask" />
+          <label for="questionInput">Test Question: </label
+          ><input
+            id="questionInput"
+            name="questionInput"
+            placeholder="Enter question here"
+          />
           <!-- <button type="submit">+</button> -->
         </div>
         <ol class="answer-options" type="a">
@@ -25,14 +30,14 @@
         </ol>
         <div>
           <select id="correctAnswerDropdown">
-            <option value="">select correct answer</option>
+            <option value="">Select Correct Answer</option>
           </select>
         </div>
-        <button type="submit">submit question</button>
+        <button type="submit">Submit Question</button>
       </div>
       <!-- display created questions -->
       <pre id="displayQuestions"></pre>
     </div>
-    <script src="./scripts/scripts.js"></script>
+    <script src="../scripts/scripts.js"></script>
   </body>
 </html>

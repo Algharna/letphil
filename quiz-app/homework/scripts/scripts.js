@@ -11,11 +11,10 @@ window.onload = renderQuestions();
 
 function renderQuestions() {
   // checking if there's stored data
-  // const questionsInLocalStorage = localStorage.getItem("QUIZ_APP_questions");
-  // if (questionsInLocalStorage) quizQuestions = questionsInLocalStorage;
-  // else
-  //   quizQuestions = [];
-  // displayQuestions.innerHTML = JSON.stringify(quizQuestions, null, 2);
+  const questionsInLocalStorage = localStorage.getItem("QUIZ_APP_questions");
+  if (questionsInLocalStorage) quizQuestions = questionsInLocalStorage;
+  else quizQuestions = [];
+  displayQuestions.innerHTML = JSON.stringify(quizQuestions, null, 2);
 
   // checking if local Storage key is there
   quizQuestions = JSON.parse(localStorage.getItem("QUIZ_APP_questions")) || [];
@@ -151,15 +150,25 @@ for (let i = 0; i < storedQuestions.length; i++) {
   const current = storedQuestions[i];
 
   const question = current.question;
+  // const answerOptionsKey = current.answeroptions.key;
   const answerOptions = current.answerOptions;
+  const answerOptionQuestions = current.answerOptions.values;
   const answer = current.answer;
   // when create element -> it's ready to get enriched
   const div = document.createElement("div"); // <div></div>
   const h3 = document.createElement("h3"); // <h3></h3>
-  h3.textContent = question; // <h3>questioncontent</h3>
+  h3.textContent = question;
+  // <h3>question content</h3>
   div.appendChild(h3); // <div><h3>questionContent</h3></div>
 
-  // const p = document.createElement("p");
+  const answerOptionsP = document.createElement("p");
+  answerOptionsP.textContent = answerOptionQuestions;
+  div.appendChild(answerOptionsP);
+
+  const answerP = document.createElement("p");
+  answerP.textContent = answer;
+  div.appendChild(answerP);
   // p.textContent = JSON.stringify(storedQuestions[i]);
-  document.querySelector(".container").appendChild(div); // <div class=container><div><h3>questionContent</h3></div></div>
+  document.querySelector(".container").appendChild(div);
+  // <div class=container><div><h3>questionContent</h3></div></div>
 }
