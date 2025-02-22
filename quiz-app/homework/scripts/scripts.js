@@ -151,8 +151,7 @@ for (let i = 0; i < storedQuestions.length; i++) {
 
   const question = current.question;
   // const answerOptionsKey = current.answeroptions.key;
-  const answerOptions = current.answerOptions;
-  const answerOptionQuestions = current.answerOptions.values;
+
   const answer = current.answer;
   // when create element -> it's ready to get enriched
   const div = document.createElement("div"); // <div></div>
@@ -161,13 +160,18 @@ for (let i = 0; i < storedQuestions.length; i++) {
   // <h3>question content</h3>
   div.appendChild(h3); // <div><h3>questionContent</h3></div>
 
-  const answerOptionsP = document.createElement("p");
-  answerOptionsP.textContent = answerOptionQuestions;
-  div.appendChild(answerOptionsP);
+  const answerOptions = current.answerOptions;
+  console.log(answerOptions);
+  for (a = 0; a < answerOptions.length; a++) {
+    const answerOptionQuestions = current.answerOptions[a].option;
+    const answerOptionsP = document.createElement("p");
+    answerOptionsP.textContent = answerOptionQuestions;
+    div.appendChild(answerOptionsP);
+  }
 
-  const answerP = document.createElement("p");
-  answerP.textContent = answer;
-  div.appendChild(answerP);
+  const correctAnswer = document.createElement("p");
+  correctAnswer.textContent = answer;
+  div.appendChild(correctAnswer);
   // p.textContent = JSON.stringify(storedQuestions[i]);
   document.querySelector(".container").appendChild(div);
   // <div class=container><div><h3>questionContent</h3></div></div>
