@@ -171,10 +171,6 @@ function renderDisplay() {
       answerOptionsP.textContent =
         answerOptionValues + ": " + answerOptionOptions;
       div.appendChild(answerOptionsP);
-
-      function returnAnswerOptions() {
-        return answerOptionValues, answerOptionOptions;
-      }
     }
 
     const correctAnswer = document.createElement("p");
@@ -184,8 +180,9 @@ function renderDisplay() {
     document.querySelector(".container").appendChild(div);
     // <div class=container><div><h3>questionContent</h3></div></div>
   }
-
-  return returnAnswerOptions();
 }
 renderDisplay();
-console.log("returnAnswerOptions()", returnAnswerOptions());
+
+// function checkAnswer() {
+
+// }
