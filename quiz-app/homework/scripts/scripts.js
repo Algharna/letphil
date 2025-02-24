@@ -1,9 +1,11 @@
 // global variables
 const submitButton = document.querySelector("button[type=submit]");
-const answerOptions = document.querySelector(".answer-options");
-const ANSWER_KEYS = "abcdefghijklmnopqrstuvwxyz"; // can select option with index
+// selected li items inside of ul.answer-options
+const answerOptions = document.querySelector(".answer-options").children;
+// can select option with index
+const ANSWER_KEYS = "abcdefghijklmnopqrstuvwxyz";
 
-// init emptyy array
+// init empty array
 let quizQuestions;
 
 // onload of page run functin renderQuestions
@@ -48,10 +50,6 @@ submitButton.addEventListener("click", function (e) {
   e.preventDefault();
   // here setting question from questinINput.value
   const question = questionInput.value;
-  // selected li items inside of ul.answer-options
-  const answerOptions = document.querySelector(".answer-options").children; // child of .answer-options
-
-  console.log("answerOptions =", answerOptions);
 
   // set empty array for answerOptionsArr
   let answerOptionsArr = [];
@@ -90,7 +88,6 @@ submitButton.addEventListener("click", function (e) {
   renderQuestions();
 });
 
-//  -------------------------------------------------------
 // element generators ---------------------------------
 function createAnswerOptionInputWithButton() {
   const li = document.createElement("li");
@@ -101,7 +98,7 @@ function createAnswerOptionInputWithButton() {
   li.appendChild(button);
   return li;
 }
-
+// element generators ---------------------------------
 function createDropdownAnswerOption(answerKey, answerText) {
   const option = document.createElement("option");
   option.value = answerKey;
@@ -110,7 +107,6 @@ function createDropdownAnswerOption(answerKey, answerText) {
 }
 
 // add answer option handler --------------------------------
-
 let addAnswerButton = document.querySelector(".answer-options li > button");
 addAnswerButton.addEventListener("click", handleAddAnswerOption);
 
@@ -149,10 +145,9 @@ console.log("storedQuestions ", storedQuestions);
 function renderDisplay() {
   for (let i = 0; i < storedQuestions.length; i++) {
     const current = storedQuestions[i];
-
+    // question
     const question = current.question;
-    // const answerOptionsKey = current.answeroptions.key;
-
+    //correct answer
     const answer = current.answer;
     // when create element -> it's ready to get enriched
     const div = document.createElement("div"); // <div></div>
@@ -162,11 +157,11 @@ function renderDisplay() {
     div.appendChild(h3); // <div><h3>questionContent</h3></div>
 
     //loop for cycling through the answerOptions to get the values and answers
-    const answerOptions = current.answerOptions;
-    console.log(answerOptions);
-    for (a = 0; a < answerOptions.length; a++) {
-      const answerOptionValues = current.answerOptions[a].key;
-      const answerOptionOptions = current.answerOptions[a].option;
+    const answerOptionsObj = current.answerOptions;
+    console.log(answerOptionsObj);
+    for (a = 0; a < answerOptionsObj.length; a++) {
+      const answerOptionValues = current.answerOptionsObj[a].key;
+      const answerOptionOptions = current.answerOptionsObj[a].option;
       const answerOptionsP = document.createElement("p");
       answerOptionsP.textContent =
         answerOptionValues + ": " + answerOptionOptions;
