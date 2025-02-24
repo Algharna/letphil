@@ -28,8 +28,14 @@ By the end of this lesson, students will understand the evolution of HTTP reques
 ```javascript
 function getData(url, callback) {
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", url, true);
+  xhr.open("GET", url);
   xhr.onload = function () {
+    // 200 - ok
+    // 201 - created
+    // 400 - bad request
+    // 401 - unauthorized
+    // 404 - not found
+    // 500 - internal server error
     if (xhr.status >= 200 && xhr.status < 400) {
       var data = JSON.parse(xhr.responseText);
       callback(null, data);
