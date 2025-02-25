@@ -1,7 +1,7 @@
 // global variables
 const submitButton = document.querySelector("button[type=submit]");
 // selected li items inside of ul.answer-options
-const answerOptions = document.querySelector(".answer-options").children;
+const answerOptions = document.querySelector(".answer-options");
 // can select option with index
 const ANSWER_KEYS = "abcdefghijklmnopqrstuvwxyz";
 
@@ -172,7 +172,7 @@ function renderDisplay() {
     correctAnswer.textContent = answer;
     div.appendChild(correctAnswer);
     // p.textContent = JSON.stringify(storedQuestions[i]);
-    document.querySelector(".container").appendChild(div);
+    answerOptions.appendChild(div);
     // <div class=container><div><h3>questionContent</h3></div></div>
   }
 }
