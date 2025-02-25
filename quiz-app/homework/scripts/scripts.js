@@ -3,6 +3,7 @@ const submitButton = document.querySelector("button[type=submit]");
 // selected li items inside of ul.answer-options
 const answerOptions = document.querySelector(".answer-options");
 const questionsDisplay = document.getElementById("questionsDisplay");
+const displayQuestions = document.getElementById("displayQuestions");
 // can select option with index
 const ANSWER_KEYS = "abcdefghijklmnopqrstuvwxyz";
 
@@ -11,21 +12,24 @@ let quizQuestions;
 
 function renderQuestions() {
   // checking if there's stored data
-  const questionsInLocalStorage = localStorage.getItem("QUIZ_APP_questions");
-  if (questionsInLocalStorage) quizQuestions = questionsInLocalStorage;
-  else quizQuestions = [];
-  displayQuestions.innerHTML = JSON.stringify(quizQuestions, null, 2);
+  if (displayQuestions) {
+    const questionsInLocalStorage = localStorage.getItem("QUIZ_APP_questions");
+    if (questionsInLocalStorage) quizQuestions = questionsInLocalStorage;
+    else quizQuestions = [];
+    displayQuestions.innerHTML = JSON.stringify(quizQuestions, null, 2);
 
-  // checking if local Storage key is there
-  quizQuestions = JSON.parse(localStorage.getItem("QUIZ_APP_questions")) || [];
-  // setting innerHTML of display questins ( change later to actually display right UI )
-  displayQuestions.innerHTML = JSON.stringify(
-    // if quiz questions is falsy ( null, undefined, false, 0 ) ->
-    // then use empty array ( [] ) else use that quizQuestions variable
-    quizQuestions || [],
-    null,
-    2
-  );
+    // checking if local Storage key is there
+    quizQuestions =
+      JSON.parse(localStorage.getItem("QUIZ_APP_questions")) || [];
+    // setting innerHTML of display questins ( change later to actually display right UI )
+    displayQuestions.innerHTML = JSON.stringify(
+      // if quiz questions is falsy ( null, undefined, false, 0 ) ->
+      // then use empty array ( [] ) else use that quizQuestions variable
+      quizQuestions || [],
+      null,
+      2
+    );
+  }
 }
 
 // reset values
@@ -54,18 +58,16 @@ if (submitButton) {
     let answerOptionsArr = [];
 
     // run for loop on answerOptions that selected earlier except for last 1 becasue that is input
-
-    for (let i = 0; i < answerOptions.length - 1; i++) {
+    const answerOptionsLi = document.querySelector(".answer-options").children;
+    for (let i = 0; i < answerOptionsLi.length - 1; i++) {
       // pushing how answer options is { key: "string", option: "string" }
       answerOptionsArr.push({
         // push key which is ANSWER_KEYS - the lowercase alphabet string earlier and index becasue 0 is a and 1 is b ....so on
         key: ANSWER_KEYS[i],
         // selected single list item from answerOptions and getting property textContent
-        option: answerOptions[i].textContent,
+        option: answerOptionsLi[i].textContent,
       });
     }
-    console.log(answerOptions[i].textContent);
-    console.log("test", answerOptions.length);
     console.log("answerOptionsArr", answerOptionsArr);
     // crate object to store in localStorage
     const questionObj = {
@@ -168,8 +170,10 @@ function renderDisplay() {
       const answerOptionValues = answerOptionsObj[a].key;
       const answerOptionOptions = answerOptionsObj[a].option;
       const answerOptionsP = document.createElement("p");
-      answerOptionsP.textContent =
-        answerOptionValues + ": " + answerOptionOptions;
+      answerOptionsP.innerHTML = `<input type=radio value="${answerOptionValues}></input> +
+        ${answerOptionValues} +
+        ": " +
+        ${answerOptionOptions}`;
       div.appendChild(answerOptionsP);
     }
 
@@ -180,8 +184,22 @@ function renderDisplay() {
     // p.textContent = JSON.stringify(storedQuestions[i]);
     questionsDisplay.appendChild(div);
     // <div class=container><div><h3>questionContent</h3></div></div>
+    // const quiz_Display = QuizDisplay(
+    //   question,
+    //   returnValues(answerOptionValues),
+    //   returnValues(answerOptionOptions)
+    // );
+    // questionsDisplay.innerHTML += quiz_Display;
   }
 }
+// function QuizDisplay(question, answers, answerOptionsKey) {
+//   return `<div id="quizDisplay">
+//             <h2>${question}</h2>
+//             <input type=radio value="${answerOptionsKey}>${answers}</input>
+//             <button id="submitAnswers">Submit</button>
+//           </div> `;
+// }
+
 // onload of page run function renderQuestions
 window.onload = renderQuestions;
 // window.onload = renderDisplay();
