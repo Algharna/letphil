@@ -2,14 +2,12 @@
 const submitButton = document.querySelector("button[type=submit]");
 // selected li items inside of ul.answer-options
 const answerOptions = document.querySelector(".answer-options");
+const questionsDisplay = document.getElementById("questionsDisplay");
 // can select option with index
 const ANSWER_KEYS = "abcdefghijklmnopqrstuvwxyz";
 
 // init empty array
 let quizQuestions;
-
-// onload of page run functin renderQuestions
-window.onload = renderQuestions();
 
 function renderQuestions() {
   // checking if there's stored data
@@ -46,47 +44,52 @@ function resetValues() {
 }
 
 // add question handler ----------------------------------
-submitButton.addEventListener("click", function (e) {
-  e.preventDefault();
-  // here setting question from questinINput.value
-  const question = questionInput.value;
+if (submitButton) {
+  submitButton.addEventListener("click", function (e) {
+    e.preventDefault();
+    // here setting question from questinINput.value
+    const question = questionInput.value;
 
-  // set empty array for answerOptionsArr
-  let answerOptionsArr = [];
+    // set empty array for answerOptionsArr
+    let answerOptionsArr = [];
 
-  // run for loop on answerOptions that selected earlier except for last 1 becasue that is input
-  for (let i = 0; i < answerOptions.length - 1; i++) {
-    // pushing how answer options is { key: "string", option: "string" }
-    answerOptionsArr.push({
-      // push key which is ANSWER_KEYS - the lowercase alphabet string earlier and index becasue 0 is a and 1 is b ....so on
-      key: ANSWER_KEYS[i],
-      // selected single list item from answerOptions and getting property textContent
-      option: answerOptions[i].textContent,
-    });
-  }
+    // run for loop on answerOptions that selected earlier except for last 1 becasue that is input
 
-  // crate object to store in localStorage
-  const questionObj = {
-    // question -> questionINput.value
-    question: question,
-    // answer options which was created just code right above
-    answerOptions: answerOptionsArr,
-    // actual answer from dropdown value which is in the DOM
-    answer: correctAnswerDropdown.value,
-  };
+    for (let i = 0; i < answerOptions.length - 1; i++) {
+      // pushing how answer options is { key: "string", option: "string" }
+      answerOptionsArr.push({
+        // push key which is ANSWER_KEYS - the lowercase alphabet string earlier and index becasue 0 is a and 1 is b ....so on
+        key: ANSWER_KEYS[i],
+        // selected single list item from answerOptions and getting property textContent
+        option: answerOptions[i].textContent,
+      });
+    }
+    console.log(answerOptions[i].textContent);
+    console.log("test", answerOptions.length);
+    console.log("answerOptionsArr", answerOptionsArr);
+    // crate object to store in localStorage
+    const questionObj = {
+      // question -> questionINput.value
+      question: question,
+      // answer options which was created just code right above
+      answerOptions: answerOptionsArr,
+      // actual answer from dropdown value which is in the DOM
+      answer: correctAnswerDropdown.value,
+    };
 
-  // push this question obj to quizQuesions Arr
-  quizQuestions.push(questionObj);
+    // push this question obj to quizQuesions Arr
+    quizQuestions.push(questionObj);
 
-  // finally set the new quizQuestions withnew question in localStorage
-  localStorage.setItem("QUIZ_APP_questions", JSON.stringify(quizQuestions));
+    // finally set the new quizQuestions withnew question in localStorage
+    localStorage.setItem("QUIZ_APP_questions", JSON.stringify(quizQuestions));
 
-  // clear valeus
-  resetValues();
+    // clear valeus
+    resetValues();
 
-  // then re render the questions
-  renderQuestions();
-});
+    // then re render the questions
+    renderQuestions();
+  });
+}
 
 // element generators ---------------------------------
 function createAnswerOptionInputWithButton() {
@@ -108,7 +111,9 @@ function createDropdownAnswerOption(answerKey, answerText) {
 
 // add answer option handler --------------------------------
 let addAnswerButton = document.querySelector(".answer-options li > button");
-addAnswerButton.addEventListener("click", handleAddAnswerOption);
+if (addAnswerButton) {
+  addAnswerButton.addEventListener("click", handleAddAnswerOption);
+}
 
 function handleAddAnswerOption() {
   // creatte list item
@@ -160,8 +165,8 @@ function renderDisplay() {
     const answerOptionsObj = current.answerOptions;
     console.log(answerOptionsObj);
     for (a = 0; a < answerOptionsObj.length; a++) {
-      const answerOptionValues = current.answerOptionsObj[a].key;
-      const answerOptionOptions = current.answerOptionsObj[a].option;
+      const answerOptionValues = answerOptionsObj[a].key;
+      const answerOptionOptions = answerOptionsObj[a].option;
       const answerOptionsP = document.createElement("p");
       answerOptionsP.textContent =
         answerOptionValues + ": " + answerOptionOptions;
@@ -170,13 +175,17 @@ function renderDisplay() {
 
     const correctAnswer = document.createElement("p");
     correctAnswer.textContent = answer;
+
     div.appendChild(correctAnswer);
     // p.textContent = JSON.stringify(storedQuestions[i]);
-    answerOptions.appendChild(div);
+    questionsDisplay.appendChild(div);
     // <div class=container><div><h3>questionContent</h3></div></div>
   }
 }
-renderDisplay();
+// onload of page run function renderQuestions
+window.onload = renderQuestions;
+// window.onload = renderDisplay();
+document.addEventListener("DOMContentLoaded", renderDisplay);
 
 // function checkAnswer() {
 
