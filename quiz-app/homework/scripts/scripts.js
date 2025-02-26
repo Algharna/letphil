@@ -4,8 +4,10 @@ const submitButton = document.querySelector("button[type=submit]");
 const answerOptions = document.querySelector(".answer-options");
 const questionsDisplay = document.getElementById("questionsDisplay");
 const displayQuestions = document.getElementById("displayQuestions");
+const multipleChoice = document.getElementById("multipleChoice");
 // can select option with index
 const ANSWER_KEYS = "abcdefghijklmnopqrstuvwxyz";
+const answerOptionsSpan = document.getElementById("answerOptionsSpan");
 
 // init empty array
 let quizQuestions;
@@ -162,43 +164,47 @@ function renderDisplay() {
     h3.textContent = question;
     // <h3>question content</h3>
     div.appendChild(h3); // <div><h3>questionContent</h3></div>
+    const answerOptionsSpan = document.createElement("span");
+    answerOptionsSpan.id = "answerOptionsSpan";
 
     //loop for cycling through the answerOptions to get the values and answers
     const answerOptionsObj = current.answerOptions;
     console.log(answerOptionsObj);
-    for (a = 0; a < answerOptionsObj.length; a++) {
+    /*
+        BREAK
+    */
+    for (let a = 0; a < answerOptionsObj.length; a++) {
       const answerOptionValues = answerOptionsObj[a].key;
       const answerOptionOptions = answerOptionsObj[a].option;
-      const answerOptionsP = document.createElement("p");
-      answerOptionsP.innerHTML = `<input type=radio value="${answerOptionValues}></input> +
-        ${answerOptionValues} +
-        ": " +
-        ${answerOptionOptions}`;
-      div.appendChild(answerOptionsP);
+
+      answerOptionsSpan.innerHTML += `<input type="radio" name="Answers" value="${answerOptionValues}"> ${answerOptionValues}: ${answerOptionOptions} <br />`;
+
+      div.appendChild(answerOptionsSpan);
     }
 
-    const correctAnswer = document.createElement("p");
-    correctAnswer.textContent = answer;
-
-    div.appendChild(correctAnswer);
+    const submitQuestionsBtn = document.createElement("button");
+    submitQuestionsBtn.id = "submitQuestions";
+    submitQuestionsBtn.textContent = "Answer Test";
+    div.appendChild(submitQuestionsBtn);
     // p.textContent = JSON.stringify(storedQuestions[i]);
-    questionsDisplay.appendChild(div);
-    // <div class=container><div><h3>questionContent</h3></div></div>
-    // const quiz_Display = QuizDisplay(
-    //   question,
-    //   returnValues(answerOptionValues),
-    //   returnValues(answerOptionOptions)
-    // );
-    // questionsDisplay.innerHTML += quiz_Display;
+    if (questionsDisplay) {
+      questionsDisplay.appendChild(div);
+    }
+
+    if (submitQuestionsBtn) {
+      submitQuestionsBtn.addEventListener("click", () => {
+        const checkAnswer = document.querySelector(
+          'input[name="Answers"]:checked'
+        ).value;
+        console.log(checkAnswer);
+        console.log(answer);
+        if (checkAnswer === answer) {
+          alert("Correct Answer!");
+        }
+      });
+    }
   }
 }
-// function QuizDisplay(question, answers, answerOptionsKey) {
-//   return `<div id="quizDisplay">
-//             <h2>${question}</h2>
-//             <input type=radio value="${answerOptionsKey}>${answers}</input>
-//             <button id="submitAnswers">Submit</button>
-//           </div> `;
-// }
 
 // onload of page run function renderQuestions
 window.onload = renderQuestions;
