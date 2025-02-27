@@ -3,7 +3,7 @@ const submitButton = document.querySelector("button[type=submit]");
 // selected li items inside of ul.answer-options
 const answerOptions = document.querySelector(".answer-options");
 const questionsDisplay = document.getElementById("questionsDisplay");
-const displayQuestions = document.getElementById("displayQuestions");
+const displayQuestionsCode = document.getElementById("displayQuestionsCode");
 const multipleChoice = document.getElementById("multipleChoice");
 // can select option with index
 const ANSWER_KEYS = "abcdefghijklmnopqrstuvwxyz";
@@ -14,17 +14,17 @@ let quizQuestions;
 
 function renderQuestions() {
   // checking if there's stored data
-  if (displayQuestions) {
+  if (displayQuestionsCode) {
     const questionsInLocalStorage = localStorage.getItem("QUIZ_APP_questions");
     if (questionsInLocalStorage) quizQuestions = questionsInLocalStorage;
     else quizQuestions = [];
-    displayQuestions.innerHTML = JSON.stringify(quizQuestions, null, 2);
+    displayQuestionsCode.innerHTML = JSON.stringify(quizQuestions, null, 2);
 
     // checking if local Storage key is there
     quizQuestions =
       JSON.parse(localStorage.getItem("QUIZ_APP_questions")) || [];
     // setting innerHTML of display questins ( change later to actually display right UI )
-    displayQuestions.innerHTML = JSON.stringify(
+    displayQuestionsCode.innerHTML = JSON.stringify(
       // if quiz questions is falsy ( null, undefined, false, 0 ) ->
       // then use empty array ( [] ) else use that quizQuestions variable
       quizQuestions || [],
@@ -70,7 +70,7 @@ if (submitButton) {
         option: answerOptionsLi[i].textContent,
       });
     }
-    console.log("answerOptionsArr", answerOptionsArr);
+
     // crate object to store in localStorage
     const questionObj = {
       // question -> questionINput.value
@@ -87,7 +87,7 @@ if (submitButton) {
     // finally set the new quizQuestions withnew question in localStorage
     localStorage.setItem("QUIZ_APP_questions", JSON.stringify(quizQuestions));
 
-    // clear valeus
+    // clear values
     resetValues();
 
     // then re render the questions
@@ -151,7 +151,7 @@ const storedQuestions =
 
 console.log("storedQuestions ", storedQuestions);
 
-function renderDisplay() {
+function renderDisplayAndSubmitAnswers() {
   for (let i = 0; i < storedQuestions.length; i++) {
     const current = storedQuestions[i];
     // question
@@ -186,7 +186,6 @@ function renderDisplay() {
     submitQuestionsBtn.id = "submitQuestions";
     submitQuestionsBtn.textContent = "Answer Test";
     div.appendChild(submitQuestionsBtn);
-    // p.textContent = JSON.stringify(storedQuestions[i]);
     if (questionsDisplay) {
       questionsDisplay.appendChild(div);
     }
@@ -199,7 +198,10 @@ function renderDisplay() {
         console.log(checkAnswer);
         console.log(answer);
         if (checkAnswer === answer) {
-          alert("Correct Answer!");
+          console.log("Correct Answer!");
+        }
+        if (checkAnswer !== answer) {
+          console.log("Incorrect Answer!");
         }
       });
     }
@@ -208,9 +210,5 @@ function renderDisplay() {
 
 // onload of page run function renderQuestions
 window.onload = renderQuestions;
-// window.onload = renderDisplay();
-document.addEventListener("DOMContentLoaded", renderDisplay);
-
-// function checkAnswer() {
-
-// }
+//renders display after HTML is parsed from Render questions
+document.addEventListener("DOMContentLoaded", renderDisplayAndSubmitAnswers);
