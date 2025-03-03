@@ -35,6 +35,8 @@ async function fetchPokemon(pokemon = defaultPokemon) {
     renderPokemon(pokemonObj);
   } catch (error) {
     console.error(error.message);
+    alert(error.message);
+    pokemonSearch.value = "";
   }
 }
 
@@ -48,6 +50,7 @@ function renderPokemon({ name, id, image, type, height, weight, abilities }) {
   Weight: ${weight} kg</p>
   <p>Abilitie(s): ${abilities}</p>
   `;
+  pokemonSearch.value = "";
 }
-
+window.onload = fetchPokemon(defaultPokemon);
 search.addEventListener("click", fetchPokemon);
