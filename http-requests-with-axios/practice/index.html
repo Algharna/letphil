@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pokemon list</title>
+    <style></style>
+  </head>
+  <body>
+    <div class="container"></div>
+    <script src="urls.js"></script>
+    <script src="../axios.js"></script>
+    <script>
+      // put checkbox or radio button next to pokemon name
+      // if at least 1 checkbox is selected -> make button appear to go to next page
+      // construct url => <url>?pokemon=<name>,<name>,<name>...
+      // and list pokemon and style data shown in detail page
+
+      function handleCheckbox(name) {
+        console.log(name);
+      }
+
+      const mainContainer = document.querySelector(".container");
+      const pokemonListItem = (id, name, type) => {
+        return `
+          <div>
+            <a href="/practice/details.html?pokemon=${name}"><h2>${id} - ${name}</h2></a>
+      <input type="checkbox" value="${name}" onchange="handleCheckbox('${name}')" />;
+
+          </div>
+        `;
+      };
+
+      async function listPokemon() {
+        const response = await axios.get(pokemonURL + "?limit=151");
+        for (let i = 0; i < response.data.results.length; i++) {
+          const current = response.data.results[i];
+
+          mainContainer.innerHTML += pokemonListItem(i + 1, current.name);
+        }
+
+        // for (let i = 1; i <= 151; i++) {
+        //   const res = await axios.get(pokemonURL + "/" + i);
+        //   console.log(res);
+        //   mainContainer.innerHTML += pokemonListItem(
+        //     res.data.id,
+        //     res.data.name,
+        //     res.data.types[0].type.name
+        //   );
+        // }
+      }
+
+      listPokemon();
+    </script>
+  </body>
+</html>
