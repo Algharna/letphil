@@ -8,44 +8,32 @@ const submitPokemon = document.getElementById("submitPokemon");
 const submitDiv = document.getElementById("submitDiv");
 const checkPkmn = document.querySelectorAll("input[type=radio]");
 const viewPokedex = document.getElementById("viewPokedex");
-
-//fetches Pokemon by name from api
-async function fetchPokemon(pokemon) {
-  try {
-    const response = await axios.get(POKEMON_URL + pokemon);
-    console.log(response.data);
-  } catch (error) {
-    console.log(error.message);
-    alert(error.message);
-  }
-}
+const pokeArr = [];
 
 //fetches first 151 pokemon and displays them
 async function display151() {
   try {
     const response = await axios.get(POKEMON_URL + "?limit=151");
-    console.log(response.data.results);
 
     for (let i = 0; i < response.data.results.length; i++) {
       const current = response.data.results[i];
       catalogue.innerHTML += renderList(current.name, i + 1);
     }
   } catch (error) {
-    console.log(error.message);
     alert(error.message);
   }
 }
 
-//renders list for 151
+//renders list template
 function renderList(name, id) {
   return `<span>
-            <a href=""><label for="${name}">${name} - #${id}</label></a>
-            <input type="checkbox" name="${name}" onchange="checkPokemon('${name}')"/>
-          </span>
-          <br />`;
+  <a href=""><label for="${name}">${name} - #${id}</label></a>
+  <input type="checkbox" name="${name}" onchange="checkPokemon('${name}')"/>
+  </span>
+  <br />`;
 }
-const pokeArr = [];
-//checks if pokemon are checkboxed
+
+//handles checkbox onchange
 function checkPokemon(name) {
   const findName = pokeArr.indexOf(name);
   if (findName === -1) {
@@ -54,19 +42,38 @@ function checkPokemon(name) {
     pokeArr.splice(findName, 1);
   }
 }
-viewPokedex.addEventListener("click", () => {
-  window.location.href = "/homework/pokedex.html?pokemon=" + pokeArr.join("&");
-});
+//send to pokedex page
+if (viewPokedex) {
+  viewPokedex.addEventListener("click", () => {
+    window.location.href = "/http-requests-with-axios/homework/pokedex.html";
+    // ?pokemon=" + pokeArr.join("&");
+    getURLInfo();
+  });
+}
+//fetches Pokemon by name from api value of checkbox or clicked on
+async function fetchPokemon(pokemon) {
+  if (Array.isArray(pokeArr)) {
+    console.log(pokemon);
+  }
 
-// console.log(checkAll.length);
-// console.log(checkPkmnInFunction);
-// if (submitPokemon) {
-//   console.log(name);
-// } else {
-// }
-// const queryPokemon = document.querySelector(`input[name="${name}"]:checked`);
-// if (queryPokemon) {
-//   console.log("checked");
-// }
-
+  try {
+    const response = await axios.get(POKEMON_URL + pokemon);
+    console.log(response.data);
+  } catch (error) {
+    console.log(error.message);
+    alert(error.message);
+  }
+}
 window.onload = display151();
+
+function getURLInfo() {
+  const params = new URLSearchParams(window.location.search);
+  const pokemon = params.get("pokemon");
+  console.log("pokemon=", pokemon);
+  if (pokemon.indexOf("&") === -1) {
+    fetchPokemon(pokemon);
+  } else {
+    const multiPoke = pokemon.split("&").map((j) => j.trim());
+    fetchPokemon(multiPoke);
+  }
+}
