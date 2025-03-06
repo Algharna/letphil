@@ -44,27 +44,19 @@ function renderList(name, id) {
           </span>
           <br />`;
 }
-
+const pokeArr = [];
 //checks if pokemon are checkboxed
 function checkPokemon(name) {
-  const arr = [];
-  let arr2 = [];
-  const list = document.querySelectorAll("input[type=checkbox]");
-  for (let checkbox of list) {
-    if (checkbox.checked === true) {
-      console.log(name);
-      arr.push(name);
-      arr2 = [...new Set(arr)];
-      console.log(arr2);
-      const findName = arr2.indexOf(name);
-    } else if (checkbox.checked === false) {
-      arr2.splice(findName);
-    }
+  const findName = pokeArr.indexOf(name);
+  if (findName === -1) {
+    pokeArr.push(name);
+  } else {
+    pokeArr.splice(findName, 1);
   }
-  viewPokedex.addEventListener("click", () => {
-    console.log(arr2.join("&"));
-  });
 }
+viewPokedex.addEventListener("click", () => {
+  window.location.href = "/homework/pokedex.html?pokemon=" + pokeArr.join("&");
+});
 
 // console.log(checkAll.length);
 // console.log(checkPkmnInFunction);
