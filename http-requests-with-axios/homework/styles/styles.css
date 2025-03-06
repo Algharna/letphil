@@ -1,3 +1,7 @@
+** {
+  margin: 0;
+  padding: 0;
+}
 body {
   background-color: rgb(224, 60, 60);
 }
@@ -18,15 +22,29 @@ h2 {
   border: 1px solid black;
   background-color: rgb(243, 95, 95);
   border-radius: 5px;
+  height: 50%;
 }
 
 a {
   text-decoration: none;
 }
 
-#submitDiv {
+#viewPokedexBar {
   position: sticky;
-  width: 100%;
-  height: 20px;
-  align-items: flex-end;
+  width: auto;
+  height: 50px;
+  padding: 5px;
+  bottom: 0;
+  background-color: rgb(179, 25, 25);
+  text-align: center;
+  border-radius: 5px;
+}
+#viewPokedex {
+  border-radius: 2px;
+  border: none;
+  padding: 5px;
+}
+#viewPokedex:hover {
+  cursor: pointer;
+  background-color: rgb(245, 28, 28);
 }

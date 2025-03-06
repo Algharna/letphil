@@ -7,6 +7,7 @@ container.appendChild(catalogue);
 const submitPokemon = document.getElementById("submitPokemon");
 const submitDiv = document.getElementById("submitDiv");
 const checkPkmn = document.querySelectorAll("input[type=radio]");
+const viewPokedex = document.getElementById("viewPokedex");
 
 //fetches Pokemon by name from api
 async function fetchPokemon(pokemon) {
@@ -44,30 +45,36 @@ function renderList(name, id) {
           <br />`;
 }
 
+//checks if pokemon are checkboxed
 function checkPokemon(name) {
-  const checkPkmnInFunction = document.querySelector(`input[name="${name}"]`);
-  const checkAll = document.querySelectorAll("input[type=checkbox]:checked");
-  checkAll.forEach((name) => {
-    console.log(name);
+  const arr = [];
+  let arr2 = [];
+  const list = document.querySelectorAll("input[type=checkbox]");
+  for (let checkbox of list) {
+    if (checkbox.checked === true) {
+      console.log(name);
+      arr.push(name);
+      arr2 = [...new Set(arr)];
+      console.log(arr2);
+      const findName = arr2.indexOf(name);
+    } else if (checkbox.checked === false) {
+      arr2.splice(findName);
+    }
+  }
+  viewPokedex.addEventListener("click", () => {
+    console.log(arr2.join("&"));
   });
-
-  // console.log(checkAll.length);
-  // console.log(checkPkmnInFunction);
-  // if (submitPokemon) {
-  //   console.log(name);
-  // } else {
-  document.body.innerHTML += displaySubmit();
-  // }
-  // const queryPokemon = document.querySelector(`input[name="${name}"]:checked`);
-  // if (queryPokemon) {
-  //   console.log("checked");
-  // }
 }
 
-function displaySubmit() {
-  return `<div id="submitDiv">
-            <button id="submitPokemon">Submit</button>
-          </div>`;
-}
+// console.log(checkAll.length);
+// console.log(checkPkmnInFunction);
+// if (submitPokemon) {
+//   console.log(name);
+// } else {
+// }
+// const queryPokemon = document.querySelector(`input[name="${name}"]:checked`);
+// if (queryPokemon) {
+//   console.log("checked");
+// }
 
 window.onload = display151();
