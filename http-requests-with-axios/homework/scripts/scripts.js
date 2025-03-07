@@ -45,15 +45,42 @@ function checkPokemon(name) {
 //send to pokedex page
 if (viewPokedex) {
   viewPokedex.addEventListener("click", () => {
-    window.location.href = "/http-requests-with-axios/homework/pokedex.html";
+    window.location.href =
+      "/http-requests-with-axios/homework/pokedex.html?pokemon=" +
+      pokeArr.join("&");
+
     // ?pokemon=" + pokeArr.join("&");
-    getURLInfo();
+    // getURLInfo();
   });
 }
 //fetches Pokemon by name from api value of checkbox or clicked on
 async function fetchPokemon(pokemon) {
-  if (Array.isArray(pokeArr)) {
+  if (Array.isArray(pokemon)) {
     console.log(pokemon);
+    const pokemons = (
+      await Promise.all(
+        pokemon.map((pokemon) => {
+          return axios.get(url + "/" + pokemon);
+        })
+      )
+    ).map((d) => {
+      const data = d.data;
+      const pokeObj = {
+        id: data.id,
+        name: data.name,
+        types: data.types.map((type) => type.type.name).join(", "),
+        height: data.height * 0.1 + "m",
+        weight: data.weight * 0.1 + "kgs",
+        image: data.sprites.front_default,
+      };
+
+      const pre = document.createElement("pre");
+      pre.textContent = JSON.stringify(pokeObj, null, 2);
+      catalogue.innerHMTL += pre;
+    });
+
+    console.log("pokemons =", pokemons);
+    return;
   }
 
   try {
@@ -65,6 +92,7 @@ async function fetchPokemon(pokemon) {
   }
 }
 window.onload = display151();
+window.onload = getURLInfo();
 
 function getURLInfo() {
   const params = new URLSearchParams(window.location.search);
