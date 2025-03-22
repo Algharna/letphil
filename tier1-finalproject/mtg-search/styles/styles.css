@@ -84,8 +84,8 @@ button {
     grid-template-rows: auto;
     grid-template-areas:
       "header"
-      "content"
       "navbar"
+      "content"
       "footer";
   }
 }

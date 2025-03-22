@@ -20,13 +20,14 @@ async function getRandomCards() {
   try {
     const res = await axios.get(paths.random, { headers });
     console.log(res.data);
+
     const cardObj = createCardObj(res.data.name, res.data.image_uris.normal);
     console.log(cardObj);
-    document.querySelector("#results pre").innerHTML = `
-    <h2>${cardObj.card_name}</hr>
-    <br />
-    <img src="${cardObj.card_img}" alt="${cardObj.card_name}" />
-    `;
+    //Displays Result
+    document.querySelector("#results pre").innerHTML = displayResults(
+      cardObj.card_name,
+      cardObj.card_img
+    );
   } catch (error) {
     // handle error better
     alert(error.toString());
@@ -42,20 +43,31 @@ async function searchCard(q) {
       },
       { headers }
     );
-    console.log(res.data);
 
-    const cardObj = createCardObj(res.data.name, res.data.image_uris.normal);
-    document.querySelector("#results pre").innerHTML = `
-    <h2>${cardObj.card_name}</hr>
-    <br />
-    <img src="${cardObj.card_img}" alt="${cardObj.card_name}" />
-    `;
+    const exactMatch = res.data.data.find((c) => c.name === q);
+
+    if (!exactMatch) {
+      for (let i = 0; i < res.data.data.length; i++) {
+        const current = res.data.data[i];
+        document.querySelector("#results pre").innerHTML += displayResults(
+          current.name,
+          current.image_uris?.normal ?? ""
+        );
+      }
+    } else {
+      document.querySelector("#results pre").innerHTML += displayResults(
+        exactMatch.name,
+        exactMatch.image_uris?.normal ?? ""
+      );
+    }
   } catch (error) {
+    console.error("error =", error);
     alert(error.toString());
   }
 }
 
 search.onclick = async function () {
+  document.querySelector("#results pre").innerHTML = "";
   const value = cardSearch.value;
   await searchCard(value);
   cardSearch.value = "";
@@ -67,6 +79,19 @@ function createCardObj(name, img) {
     card_img: img,
   };
   return cardObj;
+}
+
+//display Results
+function displayResults(name, img) {
+  if (img) {
+    return `
+      <h2>${name}</hr>
+      <br />
+      <img src="${img}" alt="${name}" />
+      `;
+  } else {
+    return `<h2>${name}</h2>`;
+  }
 }
 
 // getRandomCards();
