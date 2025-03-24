@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MTG Card Search</title>
     <link rel="stylesheet" href="./styles/styles.css" />
-    <script defer src="./scripts/globals.js"></script>
   </head>
   <body>
     <div class="flex-container">
@@ -16,7 +15,7 @@
         <aside class="navbar">
           <span>
             <a href="">Home</a> | 
-            <a href="#" onclick="favorites()">Favorites</a> | 
+            <a href="#" onclick="displayFavorites()">Favorites</a> | 
             <a href="#" onclick="getRandomCards()">Random Card</a>
           </span>
         </aside>
@@ -28,8 +27,9 @@
             <button id="search">Search</button>
           </div>
           <div id="results">
-            <pre>
-            </pre>
+            <div>
+
+            </div>
           </div>
         </main>
         <!-- Footer -->
@@ -40,6 +40,5 @@
     <!-- scripts below -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./scripts/scripts.js"></script>
-    <script src="./scripts/globals.js"></script>
   </body>
 </html>
