@@ -43,13 +43,11 @@ async function searchCard(q) {
           document.querySelector("#results div").innerHTML += displayResults(
             cardObj.card_name
           );
-          await favorites.addEventListener("click", addToFavorites(cardObj));
         } else if (cardObj.card_layout !== "transform") {
           document.querySelector("#results div").innerHTML += displayResults(
             cardObj.card_name,
             cardObj.card_img?.normal ?? ""
           );
-          await favorites.addEventListener("click", addToFavorites(cardObj));
         }
       }
     } else {
@@ -126,13 +124,14 @@ function createCardObj(name, img, layout) {
   return cardObj;
 }
 //add card to favorites in localstorage
-async function addToFavorites(Obj) {
+function addToFavorites(Obj) {
   localStorage.setItem("mtg", JSON.stringify(Obj));
 }
 
+const favoriteCards = localStorage.getItem("mtg");
 //renders favorites from localstorage
 function displayFavorites() {
-  localStorage.getItem("mtg", "card");
+  console.log(favoriteCards);
 }
 
 //display Results
