@@ -38,24 +38,29 @@ async function searchCard(q) {
           current.image_uris,
           current.layout
         );
-        console.log(cardObj);
-        console.log(cardObj.card_layout);
 
         if (cardObj.card_layout === "transform") {
           document.querySelector("#results div").innerHTML += displayResults(
             cardObj.card_name
           );
+          await favorites.addEventListener("click", addToFavorites(cardObj));
         } else if (cardObj.card_layout !== "transform") {
           document.querySelector("#results div").innerHTML += displayResults(
             cardObj.card_name,
             cardObj.card_img?.normal ?? ""
           );
+          await favorites.addEventListener("click", addToFavorites(cardObj));
         }
       }
     } else {
-      document.querySelector("#results div").innerHTML = displayResults(
+      const cardObj = createCardObj(
         exactMatch.name,
-        exactMatch.image_uris?.normal ?? ""
+        exactMatch.image_uris,
+        exactMatch.layout
+      );
+      document.querySelector("#results div").innerHTML = displayResults(
+        cardObj.card_name,
+        cardObj.card_img?.normal ?? ""
       );
     }
   } catch (error) {
@@ -86,15 +91,17 @@ async function getRandomCards() {
         cardObj.card_img?.normal ?? ""
       );
     }
+    favorites.addEventListener("click", addToFavorites(cardObj));
   } catch (error) {
     // handle error better
     alert(error.toString());
   }
 }
 search.onclick = async function () {
-  // if(cardSearch.value.trim() === "") {
-
-  // }
+  if (cardSearch.value.trim() === "") {
+    alert("Enter a valid card.");
+    return;
+  }
   const loader = document.createElement("div");
   loader.classList.add("loader");
   try {
@@ -119,10 +126,14 @@ function createCardObj(name, img, layout) {
   return cardObj;
 }
 //add card to favorites in localstorage
-function addToFavorites() {}
+async function addToFavorites(Obj) {
+  localStorage.setItem("mtg", JSON.stringify(Obj));
+}
 
 //renders favorites from localstorage
-function displayFavorites() {}
+function displayFavorites() {
+  localStorage.getItem("mtg", "card");
+}
 
 //display Results
 function displayResults(name, img) {
