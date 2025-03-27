@@ -89,7 +89,6 @@ img {
   width: 120px;
   height: 120px;
   animation: spin 2s linear infinite;
-  text-align: center;
 }
 
 @keyframes spin {

@@ -1,5 +1,7 @@
 const BASE = "https://api.scryfall.com";
 
+const cardsArr = [];
+
 const paths = {
   random: "/cards/random",
   search: "/cards/search",
@@ -123,15 +125,22 @@ function createCardObj(name, img, layout) {
   };
   return cardObj;
 }
-//add card to favorites in localstorage
-function addToFavorites(Obj) {
-  localStorage.setItem("mtg", JSON.stringify(Obj));
+//Handle cards & localstorage
+
+function addToFavorites(obj) {
+  cardsArr.push(obj);
+  localStorage.setItem("mtg", JSON.stringify(cardsArr));
 }
 
 const favoriteCards = localStorage.getItem("mtg");
 //renders favorites from localstorage
-function displayFavorites() {
-  console.log(favoriteCards);
+async function displayFavorites() {
+  document.querySelector("#results div").innerHTML = "";
+  console.log(JSON.parse(favoriteCards));
+  document.querySelector("#results div").innerHTML += displayResults(
+    favoriteCards.card_name,
+    favoriteCards.card_img.normal
+  );
 }
 
 //display Results
