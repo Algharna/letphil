@@ -12,7 +12,7 @@ npm install
 
 ## to run project
 
-npm run start
+npm run dev
 
 ## packages
 
@@ -22,3 +22,5 @@ npm run start
 ### steps
 
 1. npm init -y(optional, forces yes in terminal)
+2. npm install express path
+3. 
