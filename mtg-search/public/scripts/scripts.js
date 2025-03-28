@@ -1,5 +1,5 @@
 const BASE = "https://api.scryfall.com";
-const resultsDiv = document.querySelector("#results div");
+const resultsDiv = document.getElementById("results");
 
 const paths = {
   random: "/cards/random",
@@ -91,7 +91,7 @@ cardSearch.addEventListener("keydown", async function (event) {
 
 async function search() {
   const loader = document.createElement("div");
-  loader.classList.add("loader");
+  loader.id = "loader";
   try {
     resultsDiv.innerHTML = "";
     resultsDiv.appendChild(loader);
@@ -101,7 +101,8 @@ async function search() {
   } catch (error) {
     console.error("error =", error);
   } finally {
-    resultsDiv.firstElementChild.remove();
+    console.log("TEST!");
+    document.getElementById("loader").remove();
   }
 }
 
