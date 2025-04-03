@@ -21,11 +21,13 @@ Make simple express server with post requests that writes to txt file
 ## Steps
 
     npm init -y
-    npm install express path fs
+    npm install express path
     touch index.js
     create .gitignore and add node_modules
     update package.json `scripts` key to include dev command -> node --watch index.js
     update contents of index.js
       const express = require("express")
+      const path = require("path")
+      const fs = require("fs")
       const app = express()
       app.listen(<PORT>, callback)
