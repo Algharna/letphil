@@ -1,0 +1,19 @@
+### HEALTH CHECK
+GET http://localhost:8888/ping
+
+### SAVE CAR
+POST http://localhost:8888/api/cars
+content-type: application/json
+
+{
+  "year": 1997,
+  "make": "honda",
+  "model": "civic LX",
+  "color": "Red"
+}
+
+### list cars
+GET http://localhost:8888/api/cars
+
+### get car by specific id
+GET http://localhost:8888/api/cars/2

@@ -1,5 +1,5 @@
 {
-  "name": "example",
+  "name": "cars",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -9,10 +9,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "description": "",
   "dependencies": {
-    "express": "^5.1.0",
-    "path": "^0.12.7"
-  },
-  "description": ""
+    "express": "^5.1.0"
+  }
 }
