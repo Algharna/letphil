@@ -1,0 +1,20 @@
+{
+  "name": "express-boilerplate2",
+  "version": "1.0.0",
+  "description": "node express boilerplate to be reused",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.7"
+  }
+}
