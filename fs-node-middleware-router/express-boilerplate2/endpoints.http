@@ -1,3 +1,17 @@
 ## healthcheck
 
 GET http://localhost:8888/health
+
+### CREATE USER
+
+POST http://localhost:8888/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "David",
+  "age": 28
+}
+
+###
+
+GET http://localhost:8888/api/v1/users/1

@@ -1,0 +1,15 @@
+### healthcheck
+
+GET http://localhost:8888/HP
+
+### api routes
+
+GET http://localhost:8888/api/
+
+### api routes v1
+
+GET http://localhost:8888/api/v1
+
+### api routes v2
+
+GET http://localhost:8888/api/v2
