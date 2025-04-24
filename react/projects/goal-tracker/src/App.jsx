@@ -1,35 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [goals, setGoals] = React.useState([]);
+  const [goal, setGoal] = React.useState([]);
 
+  function addGoal() {
+    setGoals((prev) => [...prev, goal]);
+  }
+
+  function inputChange(e) {
+    console.log(e.target.value);
+    setGoal(e.target.value);
+  }
+
+  function deleteGoal(index) {
+    setGoals((prev) =>
+      prev.filter((_, idx) => {
+        idx !== index;
+      })
+    );
+  }
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Goal Tracker App</h1>
+      {/* An input to get a goal from user */}
+      <input onChange={inputChange} type="text" />
+      <button onClick={addGoal}>Add goal</button>
+
+      {/* Display list of goals */}
+      <ul
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 5,
+        }}
+      >
+        {goals.map((goal, index) => (
+          <li key={index}>
+            <input type="checkbox" />
+            {goal}
+            <button
+              onClick={() => {
+                deleteGoal(index);
+              }}
+              style={{
+                marginLeft: "10px",
+              }}
+            >
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
