@@ -1,13 +1,14 @@
 import React from "react";
+import { Link } from "react-router";
 
 const NavBar = () => {
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
         <div className="container">
-          <a className="navbar-brand" href="#">
-            Navbar
-          </a>
+          <Link className="navbar-brand" to="/">
+            Let Blog
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -22,24 +23,24 @@ const NavBar = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item active">
-                <a className="nav-link" href="/">
+                <Link className="nav-link" to="/">
                   Home 🏠
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/search">
+                <Link className="nav-link" to="/search">
                   Search 🔎
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/posts">
+                <Link className="nav-link" to="/posts">
                   All Posts 📃
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/create">
+                <Link className="nav-link" to="/create">
                   Create Post 📃
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

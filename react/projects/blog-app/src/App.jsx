@@ -1,11 +1,24 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
+import { Outlet } from "react-router";
 import "./App.css";
+import NavBar from "./components/NavBar/navbar.jsx";
 
 function App() {
+  const [posts, setPosts] = useState(() => {
+    const storedPosts = localStorage.getItem("posts");
+    return storedPosts ? JSON.parse(storedPosts) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("posts", JSON.stringify(posts));
+  }, [posts]);
+
   return (
     <>
-      <h1>Let Blog</h1>
-      <button className="btn btn-primary">Primary button</button>
+      <NavBar />
+      <div className="container">
+        <Outlet context={{ posts, setPosts }} />
+      </div>
     </>
   );
 }
